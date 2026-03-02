@@ -1,177 +1,151 @@
-<html lang="en">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Premium Xmoney - Business Success</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Cinzel:wght@600;700&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+        background: #050505; 
+        color: white; 
+        font-family: 'Montserrat', sans-serif; 
+        overflow-x: hidden;
+        cursor: crosshair;
+    }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Montserrat', sans-serif;
-            background: radial-gradient(circle at 20% 20%, #3a0ca3, #1a0933 40%, #000000 80%),
-                        radial-gradient(circle at 80% 80%, #4361ee, #1b1b2f 50%, #000000 90%);
-            background-blend-mode: screen;
-            background-attachment: fixed;
-            position: relative;
-            color: #fff;
-            overflow-x: hidden;
-        }
+    canvas { position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none; }
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
-            opacity: 0.25;
-            pointer-events: none;
-        }
+    .hero {
+        position: relative;
+        z-index: 1;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at center, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
+    }
 
-        .hero-text {
-            font-family: 'Cinzel', serif;
-            font-size: 90px;
-            font-weight: 700;
-            margin: 40px 0 0 50px;
-            color: #ffffff;
-            text-shadow:
-                0 0 12px #637bff,
-                0 0 30px #4c5bff,
-                0 0 45px #3a0ca3,
-                0 0 70px #3a0ca3;
-            opacity: 0;
-            animation: glowAppear 1.3s ease-out forwards, glowPulse 3s infinite ease-in-out;
-        }
+    /* --- MAGNETIC TITLE --- */
+    .title-wrapper { perspective: 1000px; }
+    .title {
+        font-family: 'Syncopate', sans-serif;
+        font-size: clamp(60px, 15vw, 200px);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: -5px;
+        line-height: 0.8;
+        background: linear-gradient(to bottom, #fff 30%, #666 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 30px rgba(255,255,255,0.1));
+        animation: titleReveal 1.5s cubic-bezier(0.2, 1, 0.3, 1);
+    }
 
-        @keyframes glowAppear {
-            0% { opacity: 0; transform: translateY(-40px) scale(0.85); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
+    .subtitle-group {
+        margin-top: 30px;
+        text-align: center;
+    }
 
-        @keyframes glowPulse {
-            0%, 100% {
-                text-shadow:
-                    0 0 12px #637bff,
-                    0 0 30px #4c5bff,
-                    0 0 45px #3a0ca3,
-                    0 0 70px #3a0ca3;
-            }
-            50% {
-                text-shadow:
-                    0 0 18px #7d8dff,
-                    0 0 40px #6c7cff,
-                    0 0 65px #5b4cff,
-                    0 0 90px #4a2acc;
-            }
-        }
+    .subtitle {
+        font-size: 14px;
+        letter-spacing: 8px;
+        text-transform: uppercase;
+        color: var(--cyan);
+        margin-bottom: 10px;
+        opacity: 0;
+        animation: fadeInUp 1s forwards 0.8s;
+    }
 
-        .subtext {
-            font-size: 22px;
-            font-weight: 300;
-            max-width: 700px;
-            margin: 20px 0 0 55px;
-            line-height: 1.6;
-            opacity: 0;
-            transform: translateX(-120px);
-            animation: fadeText 5s ease-out forwards;
-        }
+    /* --- ELITE VIP CARD --- */
+    .vip-card {
+        margin-top: 50px;
+        background: var(--glass);
+        border: 1px solid var(--border);
+        padding: 50px;
+        width: 90%;
+        max-width: 500px;
+        border-radius: 24px;
+        backdrop-filter: blur(20px);
+        position: relative;
+        overflow: hidden;
+        transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+        animation: fadeInUp 1s forwards 1.2s;
+        opacity: 0;
+    }
 
-        @keyframes fadeText {
-            0% { opacity: 0; transform: translateX(-120px); }
-            100% { opacity: 1; transform: translateX(0); }
-        }
+    .vip-card::before {
+        content: '';
+        position: absolute;
+        top: -50%; left: -50%;
+        width: 200%; height: 200%;
+        background: conic-gradient(transparent, var(--cyan), transparent 30%);
+        animation: rotate 4s linear infinite;
+        z-index: -1;
+        opacity: 0.3;
+    }
 
-        .cards {
-            display: flex;
-            justify-content: center;
-            gap: 35px;
-            margin-top: 80px;
-            flex-wrap:nowwrap;
-        }
+    .vip-card:hover {
+        transform: translateY(-15px) scale(1.02);
+        border-color: var(--cyan);
+        box-shadow: 0 20px 50px rgba(0, 242, 255, 0.15);
+    }
 
-        .card {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 30px;
-            width: 330px;
-            height: 300px;
-            border-radius: 18px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-        }
+    .features-list { list-style: none; text-align: center; margin-bottom: 30px; }
+    .features-list li {
+        padding: 15px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 14px;
+        display: block;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: white;
+        font-weight: 300;
+    }
 
-        .card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
-        }
+    .features-list li:last-child { border-bottom: none; }
 
-        .btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            padding: 15px 0;
-            background-color: #28a745;
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            transition: background 0.3s ease;
-        }
+    .join-btn {
+        width: 100%;
+        padding: 20px;
+        background: white;
+        color: black;
+        border: none;
+        border-radius: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: 0.4s;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+    }
 
-        .btn:hover {
-            background-color: #218838;
-        }
-    </style>
+    .join-btn:hover {
+        background: var(--cyan);
+        transform: scale(0.95);
+    }
 
-<body>
+    #memberCounter {
+        margin-top: 25px;
+        font-family: 'Syncopate', sans-serif;
+        font-size: 16px;
+        color: rgba(255,255,255,0.4);
+        letter-spacing: 2px;
+        text-align: center;
+    }
 
-    <div class="hero-text">Xmoney</div>
+    /* --- ANIMATIONS --- */
+    @keyframes titleReveal {
+        0% { opacity: 0; transform: skewX(-20deg) scale(0.8); filter: blur(20px); }
+        100% { opacity: 1; transform: skewX(0) scale(1); filter: blur(0); }
+    }
+    @keyframes fadeInUp {
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
 
-    <div class="subtext">
-        We have dominated the market for nearly 5 years and have the potential to bring many clients through these 3 options. Options 2 and 3 are the key to your business success.
-    </div>
-
-    <div class="horizontal-cards">
-        <div class="horizontal-cards">
-            <h2>2 Business Logos – $5</h2>
-            <p>Get high-quality, professional logos for your brand.</p>
-            <a class="btn" href="https://whop.com/checkout/plan_Bg7KX3vyIVGjk">BUY NOW</a>
-        </div>
-
-        <div class="horizontal-cards">
-            <h2>10 Business Growth Ideas – $10</h2>
-            <p>Boost your business with creative and actionable strategies.</p>
-            <a class="btn" href="https://whop.com/checkout/plan_w3oZUMd5R30D1">BUY NOW</a>
-        </div>
-
-        <div class="horizontal-cards">
-            <h2>1 Professional 30s Video – $10</h2>
-            <p>Create a compelling video that attracts more clients.</p>
-            <a class="btn" href="https://whop.com/checkout/plan_HglKg8iMbKz5I">BUY NOW</a>
-        </div>
-    </div>
-
-    <!-- NEW CARDS BELOW (AS REQUESTED) -->
-    <div class="horizontal-cards">
-       <div class="horizontal-cards">
-            <h2>10 Premium Video Edits – $75</h2>
-            <p>Super high-quality video editing services designed to elevate your business and attract more customers.</p>
-            <a class="btn" href="https://whop.com/checkout/plan_ulFmjsGbsRDUW">BUY NOW</a>
-        </div>
-
-        <div class="horizontal-cards">
-            <h2>Professional Business Website – $99</h2>
-            <p>We create a perfect, high-quality website for your business, designed to convert visitors into clients.</p>
-            <a class="btn" href="https://whop.com/checkout/plan_bHYKwHsN4hj7j">BUY NOW</a>
-        </div>
-    </div>
-
-</body>
-</html>
+    @media(max-width: 768px) {
+        .title { font-size: 70px; letter-spacing: -2px; }
+        .vip-card { padding: 30px; }
+        .features-list li { font-size: 12px; }
+    }
+</style>
