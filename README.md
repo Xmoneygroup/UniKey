@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sq">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,7 +53,7 @@
             animation: titleReveal 1.5s cubic-bezier(0.2, 1, 0.3, 1);
         }
 
-        /* --- NEW TEXT STYLING --- */
+        /* --- TEXT STYLING --- */
         .manifesto-container {
             max-width: 700px;
             text-align: center;
@@ -73,7 +73,6 @@
         }
 
         .highlight-cyan { color: var(--cyan); font-weight: 600; }
-        .highlight-urgent { color: #ff3e3e; font-weight: 600; letter-spacing: 2px; }
 
         /* --- ELITE VIP CARD --- */
         .vip-card {
@@ -176,23 +175,23 @@
     
     <div class="manifesto-container">
         <p class="manifesto-text" style="animation-delay: 0.5s">
-            Tregu nuk ka <span class="highlight-cyan">asnjë mëshirë</span> për askënd. Pa disiplinë dhe një strategji të qartë, humbjet janë të pashmangshme.
+            The market has <span class="highlight-cyan">zero mercy</span> for anyone. Without discipline and a clear strategy, losses are inevitable.
         </p>
         <p class="manifesto-text" style="animation-delay: 1.0s">
-            Qëllimi ynë është t'ju ndihmojmë të ndërtoni një <span class="highlight-cyan">qasje të strukturuar</span> me menaxhimin e duhur të riskut dhe një strategji tregtimi të qartë.
+            Our mission is to help you build a <span class="highlight-cyan">structured approach</span> through proper risk management and a precise trading strategy.
         </p>
         <p class="manifesto-text" style="animation-delay: 1.5s">
-            Nëse dëshironi të përmirësoni mënyrën se si tregtoni dhe të bëheni pjesë e <span class="highlight-cyan">ZONËS VIP</span>, bashkohuni tani. Mos prisni derisa të jetë vonë.
+            If you are ready to elevate your trading and join the <span class="highlight-cyan">VIP ZONE</span>, act now. Do not wait until it is too late.
         </p>
     </div>
 
     <div class="vip-card">
         <ul class="features-list">
-            <li>Sinjale + Strategji</li>
-            <li>57% - 60% Shkallë Fitoreje e Garantuar</li>
-            <li>3 Sinjale në Ditë (Ndonjëherë më shumë)</li>
+            <li>Signals + Strategy</li>
+            <li>57% - 60% Guaranteed Win Rate</li>
+            <li>3+ Daily Signals</li>
         </ul>
-        <a href="https://whop.com/xmoney-1/xmoney-ed/" class="join-btn" onclick="joinVIP()">Përfitoni Qasjen</a>
+        <a href="https://whop.com/xmoney-1/xmoney-ed/" class="join-btn" onclick="joinVIP()">Get Access Now</a>
     </div>
 </div>
 
