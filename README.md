@@ -237,61 +237,89 @@
 <script>
     const canvas = document.getElementById("neuralCanvas");
     const ctx = canvas.getContext("2d");
-    let mouse = { x: 0, y: 0 };
-    let frame = 0;
+    let particles = [];
+    let mouse = { x: -100, y: -100 };
 
     window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
-    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
     window.addEventListener("resize", resize);
-    resize();
 
-    function drawGrid() {
-        ctx.strokeStyle = 'rgba(0, 242, 255, 0.05)';
-        ctx.lineWidth = 1;
-        const spacing = 50;
-        const perspective = 0.8;
-        
-        // Horizontal Lines (Perspective)
-        for(let i = -20; i < 40; i++) {
-            let y = (canvas.height / 2) + (i * spacing) + (frame % spacing);
-            let opacity = 1 - (Math.abs(y - canvas.height/2) / (canvas.height/2));
-            ctx.strokeStyle = `rgba(212, 175, 55, ${opacity * 0.1})`;
-            ctx.beginPath();
-            ctx.moveTo(0, y);
-            ctx.lineTo(canvas.width, y);
-            ctx.stroke();
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        init();
+    }
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
+            this.radius = Math.random() * 1.5;
         }
-
-        // Vertical Lines (Vanish Point)
-        for(let i = -20; i < 20; i++) {
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            
+            // Interaction with mouse
+            let dx = mouse.x - this.x;
+            let dy = mouse.y - this.y;
+            let distance = Math.sqrt(dx*dx + dy*dy);
+            if(distance < 150) {
+                this.x -= dx/100;
+                this.y -= dy/100;
+            }
+        }
+        draw() {
             ctx.beginPath();
-            ctx.moveTo(canvas.width / 2, canvas.height / 2);
-            ctx.lineTo(canvas.width / 2 + (i * 400), canvas.height);
-            ctx.stroke();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(212, 175, 55, 0.8)';
+            ctx.fill();
+        }
+    }
+
+    function init() {
+        particles = [];
+        for (let i = 0; i < 120; i++) {
+            particles.push(new Particle());
         }
     }
 
     function animate() {
         ctx.fillStyle = '#020202';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        frame += 0.5;
-        drawGrid();
 
-        // Add some floating digital particles
-        for(let i=0; i<30; i++) {
-            let x = (Math.sin(i + frame*0.01) * canvas.width/2) + canvas.width/2;
-            let y = (Math.cos(i + frame*0.02) * canvas.height/2) + canvas.height/2;
-            ctx.fillStyle = 'rgba(0, 242, 255, 0.2)';
-            ctx.beginPath();
-            ctx.arc(x, y, 1, 0, Math.PI*2);
-            ctx.fill();
+        // Draw flowing connections
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+            for (let j = i + 1; j < particles.length; j++) {
+                let dx = particles[i].x - particles[j].x;
+                let dy = particles[i].y - particles[j].y;
+                let distance = Math.sqrt(dx*dx + dy*dy);
+
+                if (distance < 180) {
+                    ctx.beginPath();
+                    // Multi-color link effect
+                    let grad = ctx.createLinearGradient(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
+                    grad.addColorStop(0, 'rgba(212, 175, 55, ' + (1 - distance/180) * 0.2 + ')');
+                    grad.addColorStop(1, 'rgba(0, 242, 255, ' + (1 - distance/180) * 0.1 + ')');
+                    ctx.strokeStyle = grad;
+                    ctx.lineWidth = 0.8;
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
         }
-
         requestAnimationFrame(animate);
     }
 
     function joinVIP() { document.querySelector('.vip-card').style.transform = "scale(0.95)"; }
+    
+    resize();
     animate();
 </script>
 
