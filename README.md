@@ -239,125 +239,100 @@
     const canvas = document.getElementById("neuralCanvas");
     const ctx = canvas.getContext("2d");
     let w, h;
-    let particles = [];
-    let tick = 0;
-    let targetSpeed = 1;
-    let currentSpeed = 1;
-
-    // Background Control Setup
-    const config = {
-        particleCount: 150,
-        cyan: 'rgba(0, 242, 255, ',
-        gold: 'rgba(212, 175, 55, '
-    };
-
+    let stars = [];
+    let speedMult = 18; // Crazy high speed
+    let targetSpeed = 18;
+    
     function resize() {
         w = canvas.width = window.innerWidth;
         h = canvas.height = window.innerHeight;
     }
-
     window.addEventListener("resize", resize);
     resize();
 
-    class Particle {
+    // 3D Perspective Warp Speed Model
+    class Star {
         constructor() {
-            this.init();
+            this.reset();
         }
 
-        init() {
-            this.x = Math.random() * w;
-            this.y = Math.random() * h;
-            this.vx = (Math.random() - 0.5) * 2;
-            this.vy = (Math.random() - 0.5) * 2;
-            this.history = [];
-            this.size = Math.random() * 2 + 1;
-            this.color = Math.random() > 0.5 ? config.cyan : config.gold;
-        }
-
-        draw() {
-            ctx.beginPath();
-            ctx.strokeStyle = this.color + '0.3)';
-            ctx.lineWidth = this.size;
-            ctx.lineCap = 'round';
-            ctx.moveTo(this.x, this.y);
-            
-            for(let i = 0; i < this.history.length; i++) {
-                ctx.lineTo(this.history[i].x, this.history[i].y);
-            }
-            ctx.stroke();
+        reset() {
+            this.x = (Math.random() - 0.5) * w * 2;
+            this.y = (Math.random() - 0.5) * h * 2;
+            this.z = Math.random() * w; 
+            this.pz = this.z; 
+            this.color = Math.random() > 0.5 ? '#00f2ff' : '#d4af37';
         }
 
         update() {
-            this.history.push({x: this.x, y: this.y});
-            if(this.history.length > 10) this.history.shift();
+            this.pz = this.z;
+            this.z -= speedMult;
 
-            this.x += this.vx * currentSpeed;
-            this.y += this.vy * currentSpeed;
+            if (this.z < 1) {
+                this.reset();
+                this.pz = this.z;
+            }
+        }
 
-            // Bounce and drift
-            if(this.x < 0 || this.x > w) this.vx *= -1;
-            if(this.y < 0 || this.y > h) this.vy *= -1;
+        draw() {
+            // Perspective Projection logic
+            let sx = ((this.x / this.z) * w) + w / 2;
+            let sy = ((this.y / this.z) * h) + h / 2;
             
-            // Random jitter for "Quantum" look
-            this.vx += (Math.random() - 0.5) * 0.1;
-            this.vy += (Math.random() - 0.5) * 0.1;
+            let px = ((this.x / this.pz) * w) + w / 2;
+            let py = ((this.y / this.pz) * h) + h / 2;
+
+            ctx.beginPath();
+            ctx.strokeStyle = this.color;
+            // Lines get thicker as they approach the camera
+            ctx.lineWidth = (1 - this.z / w) * 3;
+            ctx.lineCap = 'round';
+            ctx.moveTo(px, py);
+            ctx.lineTo(sx, sy);
+            ctx.stroke();
         }
     }
 
-    function createParticles() {
-        for(let i = 0; i < config.particleCount; i++) {
-            particles.push(new Particle());
-        }
+    function init() {
+        stars = [];
+        for (let i = 0; i < 800; i++) stars.push(new Star());
     }
 
     function animate() {
-        tick++;
-        // Smooth speed transition
-        currentSpeed += (targetSpeed - currentSpeed) * 0.05;
-
-        // Dark background with slight trail
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+        // Creates the "ghosting" trail effect
+        ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
         ctx.fillRect(0, 0, w, h);
 
-        particles.forEach(p => {
-            p.update();
-            p.draw();
-        });
-
-        // Connection lines between nearby nodes
-        for(let i = 0; i < particles.length; i++) {
-            for(let j = i + 1; j < particles.length; j++) {
-                let dx = particles[i].x - particles[j].x;
-                let dy = particles[i].y - particles[j].y;
-                let dist = Math.sqrt(dx*dx + dy*dy);
-
-                if(dist < 100) {
-                    ctx.beginPath();
-                    ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - dist/100)})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
-                }
-            }
+        // Smooth speed transition logic
+        if (Math.abs(speedMult - targetSpeed) > 0.1) {
+            speedMult += (targetSpeed - speedMult) * 0.05;
         }
+
+        stars.forEach(s => {
+            s.update();
+            s.draw();
+        });
 
         requestAnimationFrame(animate);
     }
 
-    // Special Interaction: Slow down when hovering card
+    // INTERACTION: Hover Slowdown
     const card = document.getElementById('vipCard');
-    card.addEventListener('mouseenter', () => targetSpeed = 0.2);
-    card.addEventListener('mouseleave', () => targetSpeed = 1);
+    card.addEventListener('mouseenter', () => targetSpeed = 0.8);
+    card.addEventListener('mouseleave', () => targetSpeed = 18);
 
+    // INTERACTION: Click "Special" Slowdown (3 Seconds)
     function joinVIP() { 
         document.getElementById('vipCard').style.transform = "scale(0.95)"; 
-        // 3-second special slow down
-        targetSpeed = 0.05;
-        setTimeout(() => targetSpeed = 1, 3000);
+        
+        targetSpeed = 0.1; // Sudden cinematic brake
+        
+        setTimeout(() => {
+            targetSpeed = 18; // Warp back to high speed
+        }, 3000);
     }
 
-    createParticles();
+    init();
     animate();
 </script>
 
