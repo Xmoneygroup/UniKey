@@ -15,7 +15,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            background: #020202; 
+            background: #000; 
             color: white; 
             font-family: 'Montserrat', sans-serif; 
             overflow-x: hidden;
@@ -31,7 +31,7 @@
             width: 100%;
             overflow: hidden;
             height: 35px;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             border-bottom: 1px solid var(--border);
             z-index: 999;
             display: flex;
@@ -102,7 +102,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: -2px;
-            background: linear-gradient(to bottom, #fff 40%, #555 100%);
+            background: linear-gradient(to bottom, #fff 40%, #444 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: titleEntrance 1.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -122,9 +122,8 @@
 
         .highlight-cyan { color: var(--cyan); font-weight: 600; }
 
-        /* --- VIP CARD UPGRADE --- */
         .vip-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.8) 100%);
+            background: rgba(5, 5, 5, 0.85);
             border: 1px solid var(--border);
             padding: 40px;
             width: 100%;
@@ -134,7 +133,8 @@
             opacity: 0;
             transform: translateY(40px);
             animation: cardEntrance 1.5s forwards 0.8s;
-            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+            position: relative;
         }
 
         .verified-badge {
@@ -197,8 +197,6 @@
         <span class="ticker-item">EUR/USD <span class="up">1.0842 (+0.1%)</span></span>
         <span class="ticker-item">BTC/USD <span class="up">$64,231.12 (+2.4%)</span></span>
         <span class="ticker-item">ETH/USD <span class="up">$3,452.10 (+1.8%)</span></span>
-        <span class="ticker-item">XAU/USD <span class="down">$2,341.05 (-0.4%)</span></span>
-        <span class="ticker-item">EUR/USD <span class="up">1.0842 (+0.1%)</span></span>
     </div>
 </div>
 
@@ -206,8 +204,8 @@
 
 <div class="hero">
     <div class="status-container">
-        <div class="status-pill"><div class="dot"></div> SERVER: OPERATIONAL</div>
-        <div class="status-pill">MEMBERS: 12,762</div>
+        <div class="status-pill"><div class="dot"></div> CRYPTO-NET: ACTIVE</div>
+        <div class="status-pill">AUTH: ENCRYPTED</div>
     </div>
 
     <div class="title-wrapper">
@@ -216,111 +214,105 @@
     
     <div class="manifesto-container">
         <p class="manifesto-text" style="animation-delay: 0.4s">
-            The market has <span class="highlight-cyan">zero mercy</span> for anyone. Without discipline, losses are inevitable.
+            The market has <span class="highlight-cyan">zero mercy</span>. Without a strategy, you are the exit liquidity.
         </p>
         <p class="manifesto-text" style="animation-delay: 0.6s">
-            Join the <span class="highlight-cyan">Elite 1%</span>. We provide the tools, the strategy, and the signals.
+            Access the <span class="highlight-cyan">Private Terminal</span>. Professional signals for the modern trader.
         </p>
     </div>
 
     <div class="vip-card">
-        <div class="verified-badge">Verified Group</div>
+        <div class="verified-badge">Secure Entry</div>
         <ul class="features-list">
-            <li><span>Daily Signals</span> <span class="highlight-cyan">3+</span></li>
-            <li><span>Win Rate</span> <span class="highlight-cyan">60% AVG</span></li>
-            <li><span>Community</span> <span class="highlight-cyan">VIP CHAT</span></li>
+            <li><span>Market Signals</span> <span class="highlight-cyan">Institutional</span></li>
+            <li><span>Success Rate</span> <span class="highlight-cyan">Verified</span></li>
+            <li><span>Network</span> <span class="highlight-cyan">Private Node</span></li>
         </ul>
-        <a href="https://whop.com/xmoney-1/xmoney-ed/" class="join-btn" onclick="joinVIP()">Join Private Group</a>
+        <a href="https://whop.com/xmoney-1/xmoney-ed/" class="join-btn" onclick="joinVIP()">Get Access Now</a>
     </div>
 </div>
 
 <script>
     const canvas = document.getElementById("neuralCanvas");
     const ctx = canvas.getContext("2d");
-    let particles = [];
-    let mouse = { x: -100, y: -100 };
-
-    window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
-    window.addEventListener("resize", resize);
+    let w, h;
+    let time = 0;
 
     function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        init();
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
     }
+    window.addEventListener("resize", resize);
+    resize();
 
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.vx = (Math.random() - 0.5) * 0.5;
-            this.vy = (Math.random() - 0.5) * 0.5;
-            this.radius = Math.random() * 1.5;
-        }
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-            
-            // Interaction with mouse
-            let dx = mouse.x - this.x;
-            let dy = mouse.y - this.y;
-            let distance = Math.sqrt(dx*dx + dy*dy);
-            if(distance < 150) {
-                this.x -= dx/100;
-                this.y -= dy/100;
-            }
-        }
-        draw() {
+    function draw() {
+        time++;
+        ctx.fillStyle = "#000";
+        ctx.fillRect(0, 0, w, h);
+
+        const centerX = w / 2;
+        const centerY = h / 2;
+        
+        // --- 3D GRID FLOOR ---
+        ctx.lineWidth = 1;
+        for (let i = -10; i < 10; i++) {
+            // Perspective lines (Vertical-ish)
             ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(212, 175, 55, 0.8)';
-            ctx.fill();
-        }
-    }
+            ctx.strokeStyle = `rgba(0, 242, 255, 0.15)`;
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(centerX + i * (w * 0.2), h);
+            ctx.stroke();
 
-    function init() {
-        particles = [];
-        for (let i = 0; i < 120; i++) {
-            particles.push(new Particle());
-        }
-    }
-
-    function animate() {
-        ctx.fillStyle = '#020202';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        // Draw flowing connections
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update();
-            particles[i].draw();
-            for (let j = i + 1; j < particles.length; j++) {
-                let dx = particles[i].x - particles[j].x;
-                let dy = particles[i].y - particles[j].y;
-                let distance = Math.sqrt(dx*dx + dy*dy);
-
-                if (distance < 180) {
-                    ctx.beginPath();
-                    // Multi-color link effect
-                    let grad = ctx.createLinearGradient(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
-                    grad.addColorStop(0, 'rgba(212, 175, 55, ' + (1 - distance/180) * 0.2 + ')');
-                    grad.addColorStop(1, 'rgba(0, 242, 255, ' + (1 - distance/180) * 0.1 + ')');
-                    ctx.strokeStyle = grad;
-                    ctx.lineWidth = 0.8;
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
-                }
+            // Moving Horizontal lines
+            let offset = (time * 2) % 100;
+            for (let j = 0; j < 10; j++) {
+                let y = centerY + (Math.pow(j, 2) * 10) + offset;
+                if (y > h) continue;
+                let opacity = (y - centerY) / (h - centerY);
+                ctx.strokeStyle = `rgba(0, 242, 255, ${opacity * 0.2})`;
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(w, y);
+                ctx.stroke();
             }
         }
-        requestAnimationFrame(animate);
+
+        // --- DATA BEAMS ---
+        for (let i = 0; i < 15; i++) {
+            let x = (Math.sin(i * 444.4) * 0.5 + 0.5) * w;
+            let speed = (Math.sin(i) * 0.5 + 1.5);
+            let hBeam = (Math.sin(time * 0.02 + i) * 0.5 + 0.5) * 300;
+            let y = (time * speed) % (h + 300) - 300;
+
+            let grad = ctx.createLinearGradient(x, y, x, y + hBeam);
+            grad.addColorStop(0, "transparent");
+            grad.addColorStop(0.5, i % 2 === 0 ? "rgba(0, 242, 255, 0.4)" : "rgba(212, 175, 55, 0.3)");
+            grad.addColorStop(1, "transparent");
+
+            ctx.fillStyle = grad;
+            ctx.fillRect(x, y, 2, hBeam);
+            
+            // Glow at the tip
+            if(hBeam > 100) {
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = i % 2 === 0 ? "var(--cyan)" : "var(--gold)";
+                ctx.fillRect(x, y + hBeam/2, 2, 2);
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        // --- AMBIENT GLOW ---
+        let radialGrad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, h);
+        radialGrad.addColorStop(0, "transparent");
+        radialGrad.addColorStop(1, "rgba(0, 242, 255, 0.05)");
+        ctx.fillStyle = radialGrad;
+        ctx.fillRect(0,0,w,h);
+
+        requestAnimationFrame(draw);
     }
 
     function joinVIP() { document.querySelector('.vip-card').style.transform = "scale(0.95)"; }
-    
-    resize();
-    animate();
+    draw();
 </script>
 
 </body>
