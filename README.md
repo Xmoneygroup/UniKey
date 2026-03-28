@@ -3,277 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNIKEY - Specialist për Celsa Makinash</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>UNIKEY - Professional Auto Locksmith</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #d4af37;
-            --dark: #0a0a0a;
-            --glass: rgba(255, 255, 255, 0.1);
+            --gold: #FFD700;
+            --blue-accent: #00d4ff;
+            --dark-bg: #050505;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border-glass: rgba(255, 255, 255, 0.1);
         }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark);
-            color: white;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--dark-bg);
+            color: #fff;
             overflow-x: hidden;
-            scroll-behavior: smooth;
+            min-height: 100vh;
         }
 
-        /* Background Animacion 3D */
-        #bg-animation {
+        /* --- BACKGROUND ANIMACION ME LOGO --- */
+        #bg-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
-            overflow: hidden;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
         }
 
-        .car-logo {
+        .floating-logo {
             position: absolute;
-            font-size: 2rem;
-            color: rgba(212, 175, 55, 0.3);
+            font-family: 'Orbitron', sans-serif;
             font-weight: bold;
+            color: rgba(255, 255, 255, 0.08);
+            user-select: none;
+            pointer-events: none;
             white-space: nowrap;
-            animation: move linear infinite;
+            text-transform: uppercase;
         }
 
-        @keyframes move {
-            0% { transform: translateY(110vh) rotate(0deg); }
-            100% { transform: translateY(-10vh) rotate(360deg); }
-        }
-
-        /* Intro Speed Effect */
-        .fast-start { animation-duration: 3s !important; }
-        .slow-move { animation-duration: 20s !important; }
-
-        /* Header & Translate */
-        .top-bar {
+        /* --- HEADER & TRANSLATE --- */
+        .header-nav {
             display: flex;
             justify-content: flex-end;
-            padding: 20px;
+            padding: 25px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .btn-translate {
-            background: var(--gold);
-            color: black;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-
-        /* Titulli Luxury */
-        .container {
-            max-width: 1000px;
-            margin: auto;
-            text-align: center;
-            padding: 50px 20px;
-        }
-
-        h1.luxury-title {
-            font-family: 'Cinzel', serif;
-            font-size: 5rem;
+            background: transparent;
             color: var(--gold);
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-            margin-bottom: 20px;
-            animation: fadeIn 2s ease-in;
+            border: 1px solid var(--gold);
+            padding: 8px 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        /* Nentitujt */
+        .btn-translate:hover {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 15px var(--gold);
+        }
+
+        /* --- TITULLI DHE KONTENTI --- */
+        .main-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .luxury-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 15px;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(to bottom, #fff 40%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+        }
+
+        /* Nentitujt me Dizajn Modern */
+        .info-card {
+            background: var(--glass);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 2px; /* Square/Sharp Luxury Look */
+            text-align: left;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: var(--gold);
+        }
+
         .info-list {
             list-style: none;
-            padding: 0;
-            text-align: left;
-            display: inline-block;
-            background: var(--glass);
-            padding: 30px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
         }
 
         .info-list li {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 10px;
         }
 
         .info-list li::before {
-            content: '🔑';
+            content: '>';
+            color: var(--gold);
             margin-right: 15px;
+            font-family: 'Orbitron';
+            font-weight: bold;
         }
 
-        /* Galeria e Fotove */
-        .gallery {
+        /* --- GALERIA --- */
+        .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 60px;
         }
 
-        .gallery img {
+        .img-box {
+            height: 350px;
+            overflow: hidden;
+            border: 1px solid var(--border-glass);
+            position: relative;
+        }
+
+        .img-box img {
             width: 100%;
-            border-radius: 10px;
-            transition: 0.5s;
-            border: 2px solid transparent;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(40%);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .gallery img:hover {
-            transform: scale(1.05);
-            border-color: var(--gold);
+        .img-box:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.1);
         }
 
-        /* Sistemi i Vlerësimit */
-        .rating-section {
-            margin-top: 80px;
-            background: var(--glass);
+        /* --- RATING --- */
+        .rating-container {
+            background: #0a0a0a;
+            border: 1px solid var(--gold);
             padding: 40px;
-            border-radius: 15px;
+            margin-top: 40px;
         }
 
         .stars {
-            font-size: 2rem;
-            color: #555;
-            cursor: pointer;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
         }
 
-        .stars span:hover, .stars span.active {
-            color: var(--gold);
+        .star {
+            cursor: pointer;
+            color: #222;
+            transition: 0.3s;
         }
+
+        .star.active { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
 
         textarea {
             width: 100%;
-            height: 100px;
-            margin-top: 20px;
-            background: rgba(0,0,0,0.5);
+            padding: 15px;
+            background: transparent;
+            border: 1px solid var(--border-glass);
             color: white;
-            border: 1px solid var(--gold);
-            padding: 10px;
-            border-radius: 5px;
+            font-family: inherit;
+            margin-bottom: 20px;
+            outline: none;
         }
 
         .btn-submit {
-            margin-top: 10px;
             background: var(--gold);
+            color: black;
             border: none;
-            padding: 10px 30px;
+            padding: 15px 40px;
             font-weight: bold;
+            text-transform: uppercase;
             cursor: pointer;
+            font-family: 'Orbitron';
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 600px) {
-            h1.luxury-title { font-size: 3rem; }
+        /* Animacione */
+        @keyframes slide {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
         }
     </style>
 </head>
 <body>
 
-    <div id="bg-animation"></div>
+    <div id="bg-canvas"></div>
 
-    <div class="top-bar">
-        <button class="btn-translate" onclick="toggleLanguage()">Translate to English</button>
-    </div>
+    <nav class="header-nav">
+        <button class="btn-translate" onclick="toggleLanguage()">Language: English</button>
+    </nav>
 
-    <div class="container">
+    <div class="main-wrapper">
         <h1 class="luxury-title">UNIKEY</h1>
         
-        <ul class="info-list" id="content-list">
-            <li data-sq="Kemi 17 vite që merremi me këtë profesion." data-en="We have 17 years of experience in this profession.">Kemi 17 vite që merremi me këtë profesion.</li>
-            <li data-sq="Punojmë 6 ditët e javës nga e Hëna deri në diten e Shtunë, nga ora 9:30 deri në ora 19:00." data-en="We work 6 days a week, Monday to Saturday, from 9:30 AM to 7:00 PM.">Punojmë 6 ditët e javës nga e Hëna deri në diten e Shtunë, nga ora 9:30 deri në ora 19:00.</li>
-            <li data-sq="Riparojmë Dyer te makinave (Brava), Mehanizma të dritareve, Qelsa duplikat, kodime, celsa shtëpish, Diagnostikë." data-en="We repair car doors (Locks), window mechanisms, duplicate keys, coding, house keys, and Diagnostics.">Riparojmë Dyer te makinave (Brava), Mehanizma të dritareve, Qelsa duplikat, kodime, celsa shtëpish, Diagnostikë.</li>
-            <li data-sq="Lokacioni: Maqedoni, Gjorce Petrov. Na gjeni si 'UNIKKEY - Gjorce Petrov'." data-en="Location: Macedonia, Gjorce Petrov. Find us as 'UNIKKEY - Gjorce Petrov'.">Lokacioni: Maqedoni, Gjorce Petrov. Na gjeni si 'UNIKKEY - Gjorce Petrov'.</li>
-            <li data-sq="Kontakt: Muhamet Musliu - +389 070 229 348" data-en="Contact: Muhamet Musliu - +389 070 229 348">Kontakt: Muhamet Musliu - +389 070 229 348</li>
-        </ul>
-
-        <!-- Galeria (Vendos fotot e tua këtu) -->
-        <div class="gallery">
-            <img src="foto1.jpg" alt="Unikey Work 1">
-            <img src="foto2.jpg" alt="Unikey Work 2">
-            <img src="foto3.jpg" alt="Unikey Work 3">
-            <img src="foto4.jpg" alt="Unikey Work 4">
+        <div class="info-card">
+            <ul class="info-list" id="content-list">
+                <li data-sq="Kemi 17 vite qe meremi me kete profesion." data-en="We have 17 years of experience in this profession.">Kemi 17 vite qe meremi me kete profesion.</li>
+                <li data-sq="Punojm 6 ditet e javes nga e Hena deri ne dIten e Shtune , nga ora 9:30 deri ne ora 19:00." data-en="We work 6 days a week, Monday to Saturday, 9:30 AM to 7:00 PM.">Punojm 6 ditet e javes nga e Hena deri ne dIten e Shtune , nga ora 9:30 deri ne ora 19:00.</li>
+                <li data-sq="Riparojm Dyer te makinave ( Brava ), Mehanizma te dritareve te Makinave, Qelsa duplikat te makinave kodime , celsa te shtepive, Diagnostik dhe shum gjera te tjera." data-en="We repair car doors (locks), window mechanisms, duplicate keys, coding, house keys, diagnostics, and much more.">Riparojm Dyer te makinave ( Brava ), Mehanizma te dritareve te Makinave, Qelsa duplikat te makinave kodime , celsa te shtepive, Diagnostik dhe shum gjera te tjera.</li>
+                <li data-sq="Me lokacion ndodhemi ne Maqedoni, Komuna Gjorce Petrov, Me lokacion mundeni te na gjeni duke kerkuar vetem ( UNIKKEY - Gjorce Petrov )." data-en="Located in Macedonia, Gjorce Petrov. Search for 'UNIKKEY - Gjorce Petrov' to find us easily.">Me lokacion ndodhemi ne Maqedoni, Komuna Gjorce Petrov, Me lokacion mundeni te na gjeni duke kerkuar vetem ( UNIKKEY - Gjorce Petrov ).</li>
+                <li data-sq="Kontaktoni ne kete numer per cdo lloj problemi ne lidhje me kete problem tek makinat e juaja ( Muhamet Musliu - + 389 070 229 348 )" data-en="Contact us for any car-related issues at: ( Muhamet Musliu - + 389 070 229 348 )">Kontaktoni ne kete numer per cdo lloj problemi ne lidhje me kete problem tek makinat e juaja ( Muhamet Musliu - + 389 070 229 348 )</li>
+            </ul>
         </div>
 
-        <!-- Vleresimet -->
-        <div class="rating-section">
-            <h3 id="rate-title">Vlerësoni Punën Tonë</h3>
-            <div class="stars" id="star-container">
-                <span onclick="rate(1)">★</span><span onclick="rate(2)">★</span><span onclick="rate(3)">★</span><span onclick="rate(4)">★</span><span onclick="rate(5)">★</span>
+        <div class="gallery-grid">
+            <div class="img-box"><img src="foto1.jpg"></div>
+            <div class="img-box"><img src="foto2.jpg"></div>
+            <div class="img-box"><img src="foto3.jpg"></div>
+            <div class="img-box"><img src="foto4.jpg"></div>
+            <div class="img-box"><img src="foto5.jpg"></div>
+            <div class="img-box"><img src="foto6.jpg"></div>
+        </div>
+
+        <div class="rating-container">
+            <h2 id="rate-title" style="margin-bottom:20px; font-family:'Orbitron'">VLERSONI PUNEN TONË</h2>
+            <div class="stars">
+                <span class="star" onclick="setRating(1)">★</span>
+                <span class="star" onclick="setRating(2)">★</span>
+                <span class="star" onclick="setRating(3)">★</span>
+                <span class="star" onclick="setRating(4)">★</span>
+                <span class="star" onclick="setRating(5)">★</span>
             </div>
-            <textarea id="comment" placeholder="Lini komentin tuaj këtu..."></textarea>
-            <button class="btn-submit" onclick="submitFeedback()">Dërgo Komentin</button>
+            <textarea id="feedback" placeholder="Shkruani komentin tuaj këtu..."></textarea>
+            <button class="btn-submit" onclick="sendFeedback()">DËRGO KOMENTIN</button>
         </div>
     </div>
 
     <script>
-        // Krijimi i animacionit te background-it
-        const bg = document.getElementById('bg-animation');
-        const brands = ['LAMBORGHINI', 'FERRARI', 'PORSCHE', 'BMW', 'AUDI', 'MERCEDES', 'TOYOTA', 'VW'];
-        
-        function createLogo() {
+        // --- LOGO BACKGROUND ANIMATION ---
+        const brands = ['LAMBORGHINI', 'FERRARI', 'PORSCHE', 'BMW', 'AUDI', 'MERCEDES', 'TOYOTA', 'VW', 'CADILLAC'];
+        const canvas = document.getElementById('bg-canvas');
+
+        function createFloatingLogo() {
             const logo = document.createElement('div');
-            logo.className = 'car-logo fast-start';
+            logo.className = 'floating-logo';
             logo.innerText = brands[Math.floor(Math.random() * brands.length)];
-            logo.style.left = Math.random() * 100 + 'vw';
-            logo.style.opacity = Math.random();
-            bg.appendChild(logo);
+            
+            const startPos = Math.random() * 100;
+            logo.style.left = startPos + 'vw';
+            logo.style.top = '110vh';
+            
+            // Shpejtesia fillestare (3 sekondat e para te jete e shpejte)
+            const duration = 15 + Math.random() * 10; 
+            logo.style.transition = `transform ${duration}s linear, opacity 2s`;
+            
+            canvas.appendChild(logo);
 
-            // Ngadalesimi pas 3 sekondave
+            // Animacioni i levizjes
             setTimeout(() => {
-                logo.classList.remove('fast-start');
-                logo.classList.add('slow-move');
-            }, 3000);
+                logo.style.transform = `translateY(-120vh) rotate(${Math.random() * 360}deg)`;
+            }, 100);
 
-            // Hiqe kur mbaron
-            setTimeout(() => { logo.remove(); }, 25000);
+            // Pastrimi
+            setTimeout(() => { logo.remove(); }, duration * 1000);
         }
 
-        setInterval(createLogo, 1000);
+        // Gjenero logo vazhdimisht
+        setInterval(createFloatingLogo, 1500);
 
-        // Funksioni i perkthimit
-        let currentLang = 'sq';
+        // --- TRANSLATE LOGIC ---
+        let isEn = false;
         function toggleLanguage() {
             const items = document.querySelectorAll('#content-list li');
             const btn = document.querySelector('.btn-translate');
-            const rateTitle = document.getElementById('rate-title');
+            const rateH2 = document.getElementById('rate-title');
             
-            if (currentLang === 'sq') {
-                items.forEach(li => li.innerText = li.getAttribute('data-en'));
-                btn.innerText = "Kthe në Shqip";
-                rateTitle.innerText = "Rate Our Work";
-                currentLang = 'en';
-            } else {
-                items.forEach(li => li.innerText = li.getAttribute('data-sq'));
-                btn.innerText = "Translate to English";
-                rateTitle.innerText = "Vlerësoni Punën Tonë";
-                currentLang = 'sq';
-            }
+            isEn = !isEn;
+            items.forEach(li => {
+                li.innerText = isEn ? li.getAttribute('data-en') : li.getAttribute('data-sq');
+            });
+            btn.innerText = isEn ? "Language: Albanian" : "Language: English";
+            rateH2.innerText = isEn ? "RATE OUR WORK" : "VLERSONI PUNEN TONË";
         }
 
-        // Sistemi i yjeve
-        function rate(n) {
-            const spans = document.querySelectorAll('.stars span');
-            spans.forEach((s, idx) => {
-                s.classList.toggle('active', idx < n);
+        // --- RATING LOGIC ---
+        function setRating(n) {
+            const stars = document.querySelectorAll('.star');
+            stars.forEach((s, i) => {
+                s.classList.toggle('active', i < n);
             });
         }
 
-        function submitFeedback() {
-            alert("Faleminderit për vlerësimin tuaj!");
-            document.getElementById('comment').value = "";
+        function sendFeedback() {
+            alert("Faleminderit Muhamet! Komenti u dërgua me sukses.");
+            document.getElementById('feedback').value = "";
         }
     </script>
 </body>
