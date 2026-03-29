@@ -54,6 +54,16 @@
             100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
         }
 
+        /* ANIMACIONI I HYRJES (2 SEKONDA) */
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-entry {
+            animation: fadeInUp 2s ease-out forwards;
+        }
+
         .header-nav {
             display: flex;
             justify-content: flex-end;
@@ -88,7 +98,7 @@
             position: relative;
         }
 
-        /* NEW LUXURY KEY TITLE STYLING */
+        /* TITULLI LUXURY PA CELLESAT POSHTE */
         .luxury-title {
             display: flex;
             justify-content: center;
@@ -109,31 +119,17 @@
             text-shadow: 0 0 15px var(--gold-glow);
         }
 
-        /* Çelësi poshtë shkronjës */
-        .key-letter::after {
-            content: '🗝️';
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%) scale(0.4);
-            font-size: 2rem;
-            filter: drop-shadow(0 0 5px var(--gold));
-            opacity: 0.7;
-        }
-
-        /* Animacioni i hyrjes */
         @keyframes letterReveal {
             0% { opacity: 0; transform: rotateY(-90deg) scale(0.5); filter: brightness(5); }
             100% { opacity: 1; transform: rotateY(0deg) scale(1); filter: brightness(1); }
         }
 
-        /* Vonesat për çdo shkronjë */
         .key-letter:nth-child(1) { animation-delay: 0.1s; }
-        .key-letter:nth-child(2) { animation-delay: 0.3s; }
-        .key-letter:nth-child(3) { animation-delay: 0.5s; }
-        .key-letter:nth-child(4) { animation-delay: 0.7s; }
-        .key-letter:nth-child(5) { animation-delay: 0.9s; }
-        .key-letter:nth-child(6) { animation-delay: 1.1s; }
+        .key-letter:nth-child(2) { animation-delay: 0.2s; }
+        .key-letter:nth-child(3) { animation-delay: 0.3s; }
+        .key-letter:nth-child(4) { animation-delay: 0.4s; }
+        .key-letter:nth-child(5) { animation-delay: 0.5s; }
+        .key-letter:nth-child(6) { animation-delay: 0.6s; }
 
         .info-card {
             background: var(--glass);
@@ -171,9 +167,7 @@
         }
 
         @media (max-width: 768px) {
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
+            .gallery-grid { grid-template-columns: 1fr; }
             .key-letter { font-size: 3.5rem; }
         }
 
@@ -244,7 +238,6 @@
 </nav>
 
 <div class="main-wrapper">
-    <!-- TITULLI I RI ME ANIMACION DHE FORME CELSI -->
     <div class="luxury-title">
         <span class="key-letter">U</span>
         <span class="key-letter">N</span>
@@ -254,39 +247,42 @@
         <span class="key-letter">Y</span>
     </div>
 
-    <div class="info-card">
-        <ul class="info-list" id="content-list">
-            <li data-sq="17 vite eksperiencë profesionale." data-en="17 years of professional experience.">17 vite eksperiencë profesionale.</li>
-            <li data-sq="E Hënë - E Shtunë | 09:30 - 19:00" data-en="Monday - Saturday | 09:30 - 19:00">E Hënë - E Shtunë | 09:30 - 19:00</li>
-            <li data-sq="Brava makinash • Qelsa duplikat • Kodime • Diagnostikë" data-en="Car locks • Duplicate keys • Coding • Diagnostics">Brava makinash • Qelsa duplikat • Kodime • Diagnostikë</li>
-            <li data-sq="Lokacioni: Gjorce Petrov, Maqedoni" data-en="Location: Gjorce Petrov, Macedonia">Lokacioni: Gjorce Petrov, Maqedoni</li>
-            <li data-sq="Kontakt: Muhamed Musli - +389 70 229 348" data-en="Contact: Muhamed Musli - +389 70 229 348">Kontakt: Muhamed Musli - +389 70 229 348</li>
-        </ul>
-    </div>
-
-    <div class="gallery-grid">
-        <div class="img-box"><img src="IMG_0534.jpg" alt="Unikey 1"></div>
-        <div class="img-box"><img src="IMG_0535.jpg" alt="Unikey 2"></div>
-        <div class="img-box"><img src="IMG_0537.jpg" alt="Unikey 3"></div>
-        <div class="img-box"><img src="IMG_0536.jpg" alt="Unikey 4"></div>
-        <div class="img-box"><img src="IMG_0539.jpg" alt="Unikey 5"></div>
-        <div class="img-box"><img src="IMG_0540.jpg" alt="Unikey 6"></div>
-        <div class="img-box"><img src="IMG_0541.jpg" alt="Unikey 7"></div>
-        <div class="img-box"><img src="IMG_0542.jpg" alt="Unikey 8"></div>
-        <div class="img-box"><img src="IMG_0543.jpg" alt="Unikey 9"></div>
-    </div>
-
-    <div class="rating-container">
-        <h2 id="rate-title" style="font-family:'Orbitron'; color: var(--gold); letter-spacing: 3px;">VLERSONI SHERBIMIN TONË</h2>
-        <div class="stars">
-            <span class="star" onclick="setStar(1)">★</span>
-            <span class="star" onclick="setStar(2)">★</span>
-            <span class="star" onclick="setStar(3)">★</span>
-            <span class="star" onclick="setStar(4)">★</span>
-            <span class="star" onclick="setStar(5)">★</span>
+    <!-- PLlakata DHE FOTOT ME ANIMACION HYRJEJE -->
+    <div class="animate-entry">
+        <div class="info-card">
+            <ul class="info-list" id="content-list">
+                <li data-sq="17 vite eksperiencë profesionale." data-en="17 years of professional experience.">17 vite eksperiencë profesionale.</li>
+                <li data-sq="E Hënë - E Shtunë | 09:30 - 19:00" data-en="Monday - Saturday | 09:30 - 19:00">E Hënë - E Shtunë | 09:30 - 19:00</li>
+                <li data-sq="Brava makinash • Qelsa duplikat • Kodime • Diagnostikë" data-en="Car locks • Duplicate keys • Coding • Diagnostics">Brava makinash • Qelsa duplikat • Kodime • Diagnostikë</li>
+                <li data-sq="Lokacioni: Gjorce Petrov, Maqedoni" data-en="Location: Gjorce Petrov, Macedonia">Lokacioni: Gjorce Petrov, Maqedoni</li>
+                <li data-sq="Kontakt: Muhamed Musli - +389 70 229 348" data-en="Contact: Muhamed Musli  +389 70 229 348">Kontakt: Muhamed Musli - +389 70 229 348</li>
+            </ul>
         </div>
-        <textarea id="feedback" rows="4" placeholder="Lini mbresat tuaja..."></textarea>
-        <button class="btn-submit" onclick="alert('Faleminderit Muhamed!')">DËRGO</button>
+
+        <div class="gallery-grid">
+            <div class="img-box"><img src="IMG_0534.jpg" alt="Unikey 1"></div>
+            <div class="img-box"><img src="IMG_0535.jpg" alt="Unikey 2"></div>
+            <div class="img-box"><img src="IMG_0537.jpg" alt="Unikey 3"></div>
+            <div class="img-box"><img src="IMG_0536.jpg" alt="Unikey 4"></div>
+            <div class="img-box"><img src="IMG_0539.jpg" alt="Unikey 5"></div>
+            <div class="img-box"><img src="IMG_0540.jpg" alt="Unikey 6"></div>
+            <div class="img-box"><img src="IMG_0541.jpg" alt="Unikey 7"></div>
+            <div class="img-box"><img src="IMG_0542.jpg" alt="Unikey 8"></div>
+            <div class="img-box"><img src="IMG_0543.jpg" alt="Unikey 9"></div>
+        </div>
+
+        <div class="rating-container">
+            <h2 id="rate-title" style="font-family:'Orbitron'; color: var(--gold); letter-spacing: 3px;">VLERSONI SHERBIMIN TONË</h2>
+            <div class="stars">
+                <span class="star" onclick="setStar(1)">★</span>
+                <span class="star" onclick="setStar(2)">★</span>
+                <span class="star" onclick="setStar(3)">★</span>
+                <span class="star" onclick="setStar(4)">★</span>
+                <span class="star" onclick="setStar(5)">★</span>
+            </div>
+            <textarea id="feedback" rows="4" placeholder="Lini mbresat tuaja..."></textarea>
+            <button class="btn-submit" onclick="alert('Faleminderit Muhamed!')">DËRGO</button>
+        </div>
     </div>
 </div>
 
