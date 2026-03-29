@@ -253,7 +253,7 @@ function setStar(n) {
         s.classList.toggle('active', i < n);
     });
 }
-</script>
+</script> 
 
 </body>
 </html>
