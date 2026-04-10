@@ -3,280 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNIKEY | Premium Automotive Services</title>
+    <title>UNIKEY | Auto Tech Specialists</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Rajdhani:wght@300;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --gold: #ffcc00;
-            --bg: #050505;
-            --glass: rgba(255, 255, 255, 0.03);
+            --accent: #ffcc00;
+            --dark-grey: #111111;
         }
 
         body, html {
             margin: 0; padding: 0;
-            background-color: var(--bg);
-            color: white;
-            font-family: 'Rajdhani', sans-serif;
+            background: #000;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
         }
 
-        /* INTRO OVERLAY */
+        /* 1. SUPER INTRO ANIMATION */
         #loader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; display: flex; justify-content: center; align-items: center;
-            z-index: 10000;
+            position: fixed; inset: 0;
+            background: #000;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999;
         }
 
-        .ultra-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 15vw;
-            font-weight: 900;
-            color: transparent;
-            -webkit-text-stroke: 2px var(--gold);
-            filter: drop-shadow(0 0 15px var(--gold));
-            letter-spacing: 20px;
-            transform: scale(0.5);
+        .unikey-glitch {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 10vw;
+            font-weight: 700;
+            letter-spacing: 2vw;
+            color: var(--accent);
+            position: relative;
         }
 
-        /* NAVIGATION */
+        /* 2. BACKGROUND MESH (SHTRESA E PARË) */
+        #bg-canvas {
+            position: fixed; top: 0; left: 0;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        /* 3. NAVIGATION */
         nav {
             position: fixed; top: 0; width: 100%;
-            padding: 30px 60px; display: flex; justify-content: space-between;
-            z-index: 1000; mix-blend-mode: difference;
+            padding: 40px; display: flex; justify-content: space-between;
+            z-index: 1000;
         }
 
-        .brand { font-family: 'Orbitron'; font-size: 1.8rem; letter-spacing: 5px; color: var(--gold); }
+        .lang-toggle {
+            display: flex; gap: 10px;
+        }
 
-        /* SCROLL CONTAINER */
-        .main-wrapper {
-            display: flex;
-            width: 400vw; /* 4 Seksione */
+        .lang-toggle button {
+            background: none; border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; padding: 5px 15px; cursor: pointer;
+            font-family: 'Syncopate'; font-size: 10px;
+        }
+
+        .lang-toggle button:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* 4. MAIN CONTENT */
+        .hero {
             height: 100vh;
+            display: flex; flex-direction: column;
+            justify-content: center; padding: 0 10%;
         }
+
+        .hero h1 {
+            font-family: 'Syncopate'; font-size: 8vw; line-height: 1;
+            margin: 0; text-transform: uppercase;
+        }
+
+        .hero .highlight { color: var(--accent); }
 
         section {
-            width: 100vw; height: 100vh;
-            display: flex; align-items: center; justify-content: center;
-            position: relative; overflow: hidden;
-            border-right: 1px solid rgba(255,204,0,0.1);
+            min-height: 100vh;
+            display: flex; align-items: center;
+            padding: 100px 10%;
+            position: relative;
         }
 
-        .canvas-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
-        }
-
-        .glass-card {
-            position: relative; z-index: 2;
-            background: var(--glass);
-            backdrop-filter: blur(20px);
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 60px;
-            border: 1px solid rgba(255,204,0,0.2);
-            border-radius: 2px;
             max-width: 600px;
-            transform: skewX(-5deg); /* Dizajn agresiv */
+            position: relative;
+            z-index: 10;
         }
 
-        h2 { 
-            font-family: 'Orbitron'; font-size: 4.5rem; margin: 0; 
-            color: var(--gold); text-transform: uppercase;
-            line-height: 0.9;
+        .service-card h2 {
+            font-family: 'Syncopate'; font-size: 3rem; margin-bottom: 20px;
+            color: var(--accent);
         }
 
-        p { font-size: 1.5rem; font-weight: 300; letter-spacing: 1px; margin-top: 20px; }
-
-        .btn-translate {
-            background: none; border: 1px solid var(--gold); color: var(--gold);
-            padding: 10px 25px; cursor: pointer; font-family: 'Orbitron';
-            transition: 0.4s; margin-left: 10px;
+        .service-card p {
+            font-size: 1.2rem; line-height: 1.8; opacity: 0.7; font-weight: 300;
         }
 
-        .btn-translate:hover { background: var(--gold); color: black; }
-
-        /* FOOTER / CONTACT */
-        .contact-info {
-            margin-top: 30px;
-            border-top: 1px solid var(--gold);
-            padding-top: 20px;
+        /* 5. 3D CONTAINER FOR EACH SECTION */
+        .three-container {
+            position: absolute; right: 0; top: 0;
+            width: 50vw; height: 100%;
+            z-index: 1;
         }
 
-        .phone-link {
-            font-size: 2.5rem; color: var(--gold); font-family: 'Orbitron';
-            text-decoration: none; display: block; margin-top: 10px;
+        /* 6. CONTACT FOOTER */
+        footer {
+            padding: 100px 10%;
+            background: var(--dark-grey);
+            border-top: 1px solid var(--accent);
         }
 
-        /* INDICATOR */
-        .scroll-hint {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            font-family: 'Orbitron'; font-size: 0.8rem; letter-spacing: 4px;
-            color: var(--gold); opacity: 0.5; z-index: 100;
+        .footer-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 40px;
         }
 
+        .contact-number {
+            font-family: 'Syncopate'; font-size: 3vw;
+            color: var(--accent); text-decoration: none;
+        }
+
+        .info-txt { font-size: 1.5rem; opacity: 0.8; margin: 10px 0; }
     </style>
 </head>
 <body>
 
     <div id="loader">
-        <h1 class="ultra-title">UNIKEY</h1>
+        <div class="unikey-glitch" id="intro-text">UNIKEY</div>
     </div>
 
+    <canvas id="bg-canvas"></canvas>
+
     <nav>
-        <div class="brand">UNIKEY // CORE</div>
-        <div>
-            <button class="btn-translate" onclick="changeLang('sq')">SQ</button>
-            <button class="btn-translate" onclick="changeLang('en')">EN</button>
+        <div style="font-family: 'Syncopate'; font-weight: 700; font-size: 1.5rem;">UK // 2026</div>
+        <div class="lang-toggle">
+            <button onclick="changeLang('sq')">ALB</button>
+            <button onclick="changeLang('en')">ENG</button>
         </div>
     </nav>
 
-    <div class="scroll-hint">SCROLL HORIZONTALISHT</div>
+    <main>
+        <div class="hero">
+            <h1 id="h-title">TEKNOLOGJIA <br><span class="highlight">E ÇELSAVE</span></h1>
+            <p style="font-size: 1.5rem; max-width: 600px; margin-top: 20px;" id="h-sub">
+                Lider në riparimin dhe kodimin e avancuar të të gjitha markave të makinave.
+            </p>
+        </div>
 
-    <div class="main-wrapper">
-        
-        <section id="keys">
-            <div class="canvas-bg" id="canv-1"></div>
-            <div class="glass-card">
-                <h2 id="t1">ÇELSA AUTOMJETESH</h2>
-                <p id="d1">Saktësi milimetrike në duplikim dhe kodim çelsash për çdo model makine në treg.</p>
+        <section id="s1">
+            <div class="service-card">
+                <h2 id="t1">ÇELSA DUPLIKAT</h2>
+                <p id="d1">Nuk mbeteni kurrë jashtë. Ne krijojmë kopje perfekte për çdo lloj çelësi inteligjent ose mekanik me garanci të plotë.</p>
+            </div>
+            <div class="three-container" id="c1"></div>
+        </section>
+
+        <section id="s2">
+            <div class="three-container" style="left: 0;" id="c2"></div>
+            <div class="service-card" style="margin-left: auto;">
+                <h2 id="t2">BRAVA & XHAMA</h2>
+                <p id="d2">Riparojmë bravat e bllokuara dhe mekanizmat elektronikë të dritareve. Siguri që nuk njeh kompromis.</p>
             </div>
         </section>
 
-        <section id="locks">
-            <div class="canvas-bg" id="canv-2"></div>
-            <div class="glass-card">
-                <h2 id="t2">MEKANIZMAT E SIGURISË</h2>
-                <p id="d2">Riparim i bravave, dorezave dhe mekanizmave të dritareve me pjesë origjinale.</p>
+        <section id="s3">
+            <div class="service-card">
+                <h2 id="t3">DIAGNOSTIKË</h2>
+                <p id="d3">Skanim i moduleve elektronike të makinës, fshirje e gabimeve dhe përditësim i sistemeve qendrore.</p>
             </div>
+            <div class="three-container" id="c3"></div>
         </section>
+    </main>
 
-        <section id="diag">
-            <div class="canvas-bg" id="canv-3"></div>
-            <div class="glass-card">
-                <h2 id="t3">DIAGNOSTIKË AVANCUAR</h2>
-                <p id="d3">Skanim i plotë elektronik dhe zgjidhje e gabimeve në sistemet më komplekse.</p>
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h2 style="font-family: 'Syncopate'; color: var(--accent);">UNIKEY</h2>
+                <p class="info-txt" id="f1">Përvojë mbi 15 vite në riparimin e sistemeve të sigurisë auto.</p>
+                <p class="info-txt" id="f2">Hapur: 09:30 - 19:00 (Hënë - Shtunë)</p>
             </div>
-        </section>
-
-        <section id="contact">
-            <div class="glass-card" style="max-width: 800px; text-align: center;">
-                <h2 style="font-size: 6rem;">UNIKEY</h2>
-                <div class="contact-info">
-                    <p id="exp">MBI 15 VITE EKSPERIENCË NË TEKNOLOGJINË AUTOMOBILISTIKE</p>
-                    <p id="hours">HAPUR: E HËNË - E SHTUNË (09:30 - 19:00)</p>
-                    <a href="tel:+389070229348" class="phone-link">+389 070 229 348</a>
-                </div>
+            <div style="text-align: right;">
+                <p>TELEFONONI MJESHTRIN:</p>
+                <a href="tel:+389070229348" class="contact-number">+389 070 229 348</a>
             </div>
-        </section>
-
-    </div>
+        </div>
+    </footer>
 
     <script>
-        // PËRKTHIMI
+        // DATA PËR GJUHËT
         const langData = {
             sq: {
-                t1: "ÇELSA AUTOMJETESH", d1: "Saktësi milimetrike në duplikim dhe kodim çelsash për çdo model makine në treg.",
-                t2: "MEKANIZMAT E SIGURISË", d2: "Riparim i bravave, dorezave dhe mekanizmave të dritareve me pjesë origjinale.",
-                t3: "DIAGNOSTIKË AVANCUAR", d3: "Skanim i plotë elektronik dhe zgjidhje e gabimeve në sistemet më komplekse.",
-                exp: "MBI 15 VITE EKSPERIENCË NË TEKNOLOGJINË AUTOMOBILISTIKE", hours: "HAPUR: E HËNË - E SHTUNË (09:30 - 19:00)"
+                h_title: "TEKNOLOGJIA <br><span class='highlight'>E ÇELSAVE</span>",
+                h_sub: "Lider në riparimin dhe kodimin e avancuar të të gjitha markave të makinave.",
+                t1: "ÇELSA DUPLIKAT", d1: "Nuk mbeteni kurrë jashtë. Ne krijojmë kopje perfekte për çdo lloj çelësi inteligjent ose mekanik me garanci të plotë.",
+                t2: "BRAVA & XHAMA", d2: "Riparojmë bravat e bllokuara dhe mekanizmat elektronikë të dritareve. Siguri që nuk njeh kompromis.",
+                t3: "DIAGNOSTIKË", d3: "Skanim i moduleve elektronike të makinës, fshirje e gabimeve dhe përditësim i sistemeve qendrore.",
+                f1: "Përvojë mbi 15 vite në riparimin e sistemeve të sigurisë auto.", f2: "Hapur: 09:30 - 19:00 (Hënë - Shtunë)"
             },
             en: {
-                t1: "VEHICLE KEYS", d1: "Millimetric precision in duplication and coding of keys for every car model on the market.",
-                t2: "SECURITY MECHANISMS", d2: "Repair of locks, handles, and window mechanisms with original parts.",
-                t3: "ADVANCED DIAGNOSTICS", d3: "Full electronic scanning and error resolution in the most complex systems.",
-                exp: "OVER 15 YEARS OF EXPERIENCE IN AUTOMOTIVE TECHNOLOGY", hours: "OPEN: MONDAY - SATURDAY (09:30 - 19:00)"
+                h_title: "CAR KEY <br><span class='highlight'>TECHNOLOGY</span>",
+                h_sub: "Leader in advanced repair and coding for all car brands.",
+                t1: "KEY DUPLICATION", d1: "Never get locked out. We create perfect copies for every smart or mechanical key with full warranty.",
+                t2: "LOCKS & WINDOWS", d2: "We repair jammed locks and electronic window mechanisms. Uncompromising security.",
+                t3: "DIAGNOSTICS", d3: "Scanning car electronic modules, clearing errors, and updating central systems.",
+                f1: "Over 15 years of experience in auto security systems.", f2: "Open: 09:30 - 19:00 (Mon - Sat)"
             }
         };
 
         function changeLang(l) {
-            Object.keys(langData[l]).forEach(id => document.getElementById(id).innerText = langData[l][id]);
+            Object.keys(langData[l]).forEach(id => {
+                document.getElementById(id).innerHTML = langData[l][id];
+            });
         }
 
-        // INTRO ANIMATION
+        // 1. INTRO ANIMATION
         gsap.registerPlugin(ScrollTrigger);
-        window.addEventListener('load', () => {
-            const tl = gsap.timeline();
-            tl.to(".ultra-title", { opacity: 1, scale: 1, letterSpacing: "5px", duration: 2, ease: "expo.out" })
-              .to("#loader", { y: "-100%", duration: 1.2, ease: "power4.inOut" });
-        });
+        const tl = gsap.timeline();
+        tl.from("#intro-text", { letterSpacing: "-10vw", opacity: 0, duration: 2, ease: "power4.out" })
+          .to("#loader", { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)", duration: 1.2, ease: "expo.inOut" });
 
-        // HORIZONTAL SCROLL LOGIC
-        let sections = gsap.utils.toArray("section");
-        gsap.to(sections, {
-            xPercent: -100 * (sections.length - 1),
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".main-wrapper",
-                pin: true,
-                scrub: 1,
-                snap: 1 / (sections.length - 1),
-                end: () => "+=" + document.querySelector(".main-wrapper").offsetWidth
-            }
-        });
+        // 2. BACKGROUND PARTICLES (Three.js)
+        const bgScene = new THREE.Scene();
+        const bgCam = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const bgRenderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
+        bgRenderer.setSize(window.innerWidth, window.innerHeight);
 
-        // 3D ENGINE (Improved Explosions)
-        function createPro3D(id, color) {
+        const starGeo = new THREE.BufferGeometry();
+        const starCount = 2000;
+        const posArray = new Float32Array(starCount * 3);
+        for(let i=0; i<starCount*3; i++) posArray[i] = (Math.random() - 0.5) * 10;
+        starGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const starMat = new THREE.PointsMaterial({ size: 0.005, color: 0xffcc00 });
+        const starMesh = new THREE.Points(starGeo, starMat);
+        bgScene.add(starMesh);
+        bgCam.position.z = 2;
+
+        function animateBg() {
+            requestAnimationFrame(animateBg);
+            starMesh.rotation.y += 0.001;
+            bgRenderer.render(bgScene, bgCam);
+        }
+        animateBg();
+
+        // 3. SECTION ANIMATIONS (BUMERANG)
+        function createService3D(containerId, color) {
             const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+            const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            document.getElementById(id).appendChild(renderer.domElement);
+            const container = document.getElementById(containerId);
+            renderer.setSize(container.offsetWidth, container.offsetHeight);
+            container.appendChild(renderer.domElement);
 
             const group = new THREE.Group();
-            const particles = [];
-            
-            // Pjesë më komplekse 3D (Vegla dhe pjesë mekanike)
-            for(let i=0; i<60; i++) {
-                const geometry = i % 3 === 0 ? new THREE.IcosahedronGeometry(0.3) : 
-                                 i % 3 === 1 ? new THREE.CylinderGeometry(0.1, 0.1, 1) : 
-                                 new THREE.TorusGeometry(0.2, 0.05, 12, 24);
-                
-                const material = new THREE.MeshPhongMaterial({ 
-                    color: color, 
-                    shininess: 100, 
-                    wireframe: i % 2 === 0 
-                });
-                
-                const mesh = new THREE.Mesh(geometry, material);
-                mesh.position.set(0,0,0);
-                particles.push(mesh);
+            const pieces = [];
+            // Krijo "pjesë mekanike"
+            for(let i=0; i<50; i++) {
+                const geo = new THREE.BoxGeometry(Math.random()*0.5, 0.05, 0.1);
+                const mat = new THREE.MeshStandardMaterial({ color: color, metalness: 1, roughness: 0.3 });
+                const mesh = new THREE.Mesh(geo, mat);
                 group.add(mesh);
+                pieces.push(mesh);
             }
             scene.add(group);
-
-            const pLight = new THREE.PointLight(varColor = color, 2, 20);
-            pLight.position.set(2, 2, 5);
+            scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+            const pLight = new THREE.PointLight(0xffffff, 1);
+            pLight.position.set(5,5,5);
             scene.add(pLight);
-            scene.add(new THREE.AmbientLight(0xffffff, 0.3));
-            camera.position.z = 8;
+            camera.position.z = 5;
 
-            // BUMERANG EXPLOSION (5 SECONDS CYCLE)
-            gsap.to(particles.map(p => p.position), {
-                x: () => (Math.random() - 0.5) * 20,
-                y: () => (Math.random() - 0.5) * 20,
-                z: () => (Math.random() - 0.5) * 20,
+            // Bumerang 5 sekonda (Hapje 2.5s, Mbyllje 2.5s)
+            gsap.to(pieces.map(p => p.position), {
+                x: () => (Math.random() - 0.5) * 10,
+                y: () => (Math.random() - 0.5) * 10,
+                z: () => (Math.random() - 0.5) * 10,
+                rotationX: () => Math.random() * 5,
                 duration: 2.5,
                 repeat: -1,
                 yoyo: true,
-                ease: "expo.inOut",
-                stagger: 0.005
+                ease: "power2.inOut",
+                stagger: 0.01,
+                scrollTrigger: {
+                    trigger: `#${containerId}`,
+                    start: "top center"
+                }
             });
 
             function animate() {
                 requestAnimationFrame(animate);
-                group.rotation.y += 0.003;
-                group.rotation.x += 0.002;
+                group.rotation.y += 0.005;
                 renderer.render(scene, camera);
             }
             animate();
         }
 
-        // Initialize 3D
-        createPro3D('canv-1', 0xffcc00); // Gold
-        createPro3D('canv-2', 0x00ffff); // Cyan
-        createPro3D('canv-3', 0xff0055); // Pink/Red Neon
+        createService3D('c1', 0xffcc00); // Gold
+        createService3D('c2', 0x555555); // Silver
+        createService3D('c3', 0xff0000); // Red (Alert/Diag)
+
     </script>
 </body>
 </html>
