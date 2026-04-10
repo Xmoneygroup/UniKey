@@ -3,197 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNIKEY | Mansory Style Professional</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
+    <title>UNIKEY | Mansory Luxury Automotive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #c5a059;
-            --dark: #0a0a0a;
+            --black: #050505;
+            --carbon: #121212;
         }
 
         body, html {
             margin: 0; padding: 0;
-            background-color: var(--dark);
-            color: white;
+            background-color: var(--black);
+            color: #fff;
             font-family: 'Montserrat', sans-serif;
-            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        /* NAVBAR */
+        /* SFONDI I PËRGJITHSHËM KARBON */
+        .page-wrapper {
+            background-image: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+            width: 100%;
+        }
+
+        /* NAVBAR PROFESIONAL */
         nav {
             position: fixed; top: 0; width: 100%;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 60px; z-index: 1000;
-            background: rgba(0,0,0,0.8);
+            padding: 25px 50px; z-index: 1000;
+            background: rgba(0,0,0,0.9);
             border-bottom: 1px solid var(--gold);
             box-sizing: border-box;
         }
 
-        .brand { font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--gold); letter-spacing: 4px; }
+        .logo { font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--gold); letter-spacing: 5px; font-weight: 900; }
         
         .lang-switch button {
-            background: none; border: 1px solid var(--gold); color: var(--gold);
-            padding: 5px 12px; cursor: pointer; font-size: 12px;
+            background: transparent; border: 1px solid var(--gold); color: var(--gold);
+            padding: 8px 18px; cursor: pointer; font-weight: bold; transition: 0.3s;
+        }
+        .lang-switch button:hover { background: var(--gold); color: #000; }
+
+        /* SEKSIONI KRYESOR (HERO) */
+        .hero {
+            height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; background: url('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=2000') center/cover no-repeat;
+            position: relative;
         }
 
-        /* SEKSIONET ME FOTO (SI NE FOTO) */
-        .full-section {
-            height: 100vh;
-            width: 100%;
-            display: flex;
-            align-items: center;
+        .hero::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.7); }
+
+        .hero-content { position: relative; z-index: 10; }
+
+        h1 { font-family: 'Cinzel', serif; font-size: 6vw; color: var(--gold); margin: 0; text-transform: uppercase; }
+        .sub-title { font-size: 1.5rem; letter-spacing: 8px; opacity: 0.8; margin-bottom: 30px; }
+
+        .btn-contact {
+            padding: 18px 45px; background: transparent; border: 2px solid var(--gold);
+            color: var(--gold); font-family: 'Cinzel'; font-size: 1.3rem;
+            cursor: pointer; text-decoration: none; transition: 0.4s;
+        }
+        .btn-contact:hover { background: var(--gold); color: #000; box-shadow: 0 0 40px rgba(197, 160, 89, 0.4); }
+
+        /* SEKSIONET SI NE FOTO (ME IMAZHE DHE TEKST GOLD) */
+        .service-section {
+            display: flex; min-height: 80vh; align-items: center;
+            padding: 60px 10%; border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+            gap: 50px;
+        }
+
+        .service-text { flex: 1; }
+        .service-text h2 { font-family: 'Cinzel', serif; font-size: 3.5rem; color: var(--gold); margin: 0; }
+        .service-text p { font-size: 1.4rem; opacity: 0.8; line-height: 1.6; margin-top: 20px; }
+
+        .service-image {
+            flex: 1;
+            height: 450px;
+            border: 2px solid var(--gold);
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Efekti Parallax */
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
             position: relative;
         }
 
-        /* Ngjyra e zezë sipër fotos që teksti të duket mirë */
-        .full-section::before {
-            content: "";
-            position: absolute; inset: 0;
-            background: linear-gradient(to right, rgba(0,0,0,0.9) 20%, transparent 80%);
-        }
+        /* Foto specifike sipas shërbimit (Zëvendësoji me fotot e tua po deshe) */
+        .img-keys { background-image: url('https://images.unsplash.com/photo-1622353100523-868cc9031940?auto=format&fit=crop&q=80&w=1000'); }
+        .img-locks { background-image: url('https://images.unsplash.com/photo-1517524008410-b44c6659bc95?auto=format&fit=crop&q=80&w=1000'); }
+        .img-diag { background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=1000'); }
 
-        .content {
-            position: relative;
-            z-index: 10;
-            padding-left: 10%;
-            max-width: 600px;
-        }
-
-        .content h1, .content h2 {
-            font-family: 'Cinzel', serif;
-            font-size: 4rem;
-            color: var(--gold);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .content p {
-            font-size: 1.3rem;
-            letter-spacing: 1px;
-            line-height: 1.5;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-
-        .btn-gold {
-            padding: 15px 40px;
-            background: transparent;
-            border: 2px solid var(--gold);
-            color: var(--gold);
-            font-family: 'Cinzel';
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-        }
-
-        .btn-gold:hover {
-            background: var(--gold);
-            color: black;
-            box-shadow: 0 0 20px var(--gold);
-        }
-
-        /* BACKGROUNDET E SECILIT SEKSION */
-        #hero { background-image: url('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=2070&auto=format&fit=crop'); }
-        #keys { background-image: url('https://images.unsplash.com/photo-1622353100523-868cc9031940?q=80&w=2070&auto=format&fit=crop'); }
-        #locks { background-image: url('https://images.unsplash.com/photo-1517524008410-b44c6659bc95?q=80&w=2070&auto=format&fit=crop'); }
-        #diag { background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop'); }
-
-        /* FOOTER */
+        /* FOOTER MANSORY */
         footer {
-            padding: 80px 10%;
-            background: #050505;
-            text-align: center;
-            border-top: 3px solid var(--gold);
+            padding: 100px 10%; text-align: center;
+            background: #000 url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            border-top: 4px solid var(--gold);
         }
 
-        footer h2 { font-family: 'Cinzel'; font-size: 3rem; color: var(--gold); }
-        .footer-info { font-size: 1.2rem; margin: 20px 0; color: #aaa; }
-        .tel { font-size: 2.5rem; color: var(--gold); text-decoration: none; font-weight: 800; display: block; }
+        .footer-logo { font-family: 'Cinzel', serif; font-size: 5rem; color: var(--gold); margin-bottom: 20px; }
+        .tel-link { font-size: 3rem; color: var(--gold); text-decoration: none; font-weight: 900; display: block; margin: 20px 0; }
+        .tel-link:hover { text-shadow: 0 0 20px var(--gold); }
 
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .service-section { flex-direction: column; text-align: center; }
+            h1 { font-size: 12vw; }
+            .service-text h2 { font-size: 2.5rem; }
+            .footer-logo { font-size: 3rem; }
+        }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="brand">UNIKEY</div>
+        <div class="logo">UNIKEY</div>
         <div class="lang-switch">
             <button onclick="changeL('sq')">ALB</button>
             <button onclick="changeL('en')">ENG</button>
         </div>
     </nav>
 
-    <section class="full-section" id="hero">
-        <div class="content">
-            <h1 id="h1">Teknologjia e Çelsave</h1>
-            <p id="p1">RIPARIM DHE KODIM PROFESIONAL PËR ÇDO MARKË MAKINASH</p>
-            <a href="tel:+389070229348" class="btn-gold" id="b1">KONTAKTO TANI</a>
-        </div>
-    </section>
+    <div class="page-wrapper">
+        
+        <section class="hero">
+            <div class="hero-content">
+                <h1 id="h1">TEKNOLOGJIA E ÇELSAVE</h1>
+                <p class="sub-title" id="p1">RIPARIM DHE KODIM PËR ÇDO MARKË MAKINASH</p>
+                <a href="tel:+389070229348" class="btn-contact" id="b1">KONTAKTO TANI</a>
+            </div>
+        </section>
 
-    <section class="full-section" id="keys">
-        <div class="content">
-            <h2 id="h2">DUPLIKAT ÇELSASH</h2>
-            <p id="p2">Saktësi milimetrike në çdo prerje. Ne krijojmë kopjen tuaj perfekte brenda pak minutave me teknologji lazer.</p>
-        </div>
-    </section>
+        <section class="service-section">
+            <div class="service-text">
+                <h2 id="t2">DUPLIKAT ÇELSASH</h2>
+                <p id="d2">Saktësi milimetrike në çdo prerje dhe kodim. Përdorim teknologjinë më të fundit lazer për çelsa inteligjentë dhe mekanikë.</p>
+            </div>
+            <div class="service-image img-keys"></div>
+        </section>
 
-    <section class="full-section" id="locks">
-        <div class="content">
-            <h2 id="h3">RIPARIM BRAVASH</h2>
-            <p id="p3">Siguri dhe funksionalitet maksimal. Riparojmë bravat e derës dhe mekanizmat e dritareve të çdo automjeti.</p>
-        </div>
-    </section>
+        <section class="service-section" style="flex-direction: row-reverse;">
+            <div class="service-text">
+                <h2 id="t3">RIPARIM BRAVASH</h2>
+                <p id="d3">Siguri dhe funksionalitet maksimal. Riparojmë bravat e derës dhe mekanizmat e dritareve sikur të ishin të reja.</p>
+            </div>
+            <div class="service-image img-locks"></div>
+        </section>
 
-    <section class="full-section" id="diag">
-        <div class="content">
-            <h2 id="h4">DIAGNOSTIKË</h2>
-            <p id="p4">Skanim i moduleve elektronike dhe fshirje e gabimeve (Check Engine, Airbag, etj) me sistemet më të fundit.</p>
-        </div>
-    </section>
+        <section class="service-section">
+            <div class="service-text">
+                <h2 id="t4">DIAGNOSTIKË</h2>
+                <p id="d4">Gjejmë dhe zgjidhim çdo gabim elektronik. Skanim i plotë i moduleve të makinës suaj me pajisje profesionale.</p>
+            </div>
+            <div class="service-image img-diag"></div>
+        </section>
+
+    </div>
 
     <footer>
-        <div class="footer-title"><h2>UNIKEY</h2></div>
-        <div class="footer-info">
-            <p id="f1">Mbi 15 Vite Eksperiencë në Teknologjinë Auto</p>
-            <p id="f2">Hapur: 09:30 - 19:00 (E hënë - E shtunë)</p>
-            <a href="tel:+389070229348" class="tel">+389 070 229 348</a>
+        <div class="footer-logo">UNIKEY</div>
+        <div id="f-info">
+            <p style="font-size: 1.5rem;">Mbi 15 Vite Eksperiencë</p>
+            <p style="font-size: 1.2rem; opacity: 0.6;">Orari: 09:30 - 19:00 (E hënë - E shtunë)</p>
+            <a href="tel:+389070229348" class="tel-link">+389 070 229 348</a>
         </div>
     </footer>
 
     <script>
-        const texts = {
+        const data = {
             sq: {
-                h1: "Teknologjia e Çelsave", p1: "RIPARIM DHE KODIM PROFESIONAL PËR ÇDO MARKË MAKINASH", b1: "KONTAKTO TANI",
-                h2: "DUPLIKAT ÇELSASH", p2: "Saktësi milimetrike në çdo prerje. Ne krijojmë kopjen tuaj perfekte brenda pak minutave.",
-                h3: "RIPARIM BRAVASH", p3: "Siguri dhe funksionalitet maksimal. Riparojmë bravat dhe mekanizmat e dritareve.",
-                h4: "DIAGNOSTIKË", p4: "Skanim i moduleve elektronike dhe fshirje e gabimeve me sistemet më të fundit.",
-                f1: "Mbi 15 Vite Eksperiencë në Teknologjinë Auto", f2: "Hapur: 09:30 - 19:00 (E hënë - E shtunë)"
+                h1: "TEKNOLOGJIA E ÇELSAVE", p1: "RIPARIM DHE KODIM PËR ÇDO MARKË MAKINASH", b1: "KONTAKTO TANI",
+                t2: "DUPLIKAT ÇELSASH", d2: "Saktësi milimetrike në çdo prerje dhe kodim. Përdorim teknologjinë më të fundit lazer.",
+                t3: "RIPARIM BRAVASH", d3: "Siguri dhe funksionalitet maksimal. Riparojmë bravat dhe mekanizmat e dritareve.",
+                t4: "DIAGNOSTIKË", d4: "Gjejmë dhe zgjidhim çdo gabim elektronik. Skanim i plotë i moduleve të makinës tuaj."
             },
             en: {
-                h1: "Key Technology", p1: "PROFESSIONAL REPAIR AND CODING FOR EVERY CAR BRAND", b1: "CONTACT NOW",
-                h2: "KEY DUPLICATION", p2: "Millimetric precision in every cut. We create your perfect copy within minutes.",
-                h3: "LOCK REPAIR", p3: "Maximum security and functionality. We repair door locks and window mechanisms.",
-                h4: "DIAGNOSTICS", p4: "Electronic module scanning and error clearing with the latest systems.",
-                f1: "Over 15 Years of Experience in Auto Tech", f2: "Open: 09:30 - 19:00 (Monday - Saturday)"
+                h1: "KEY TECHNOLOGY", p1: "REPAIR AND CODING FOR EVERY CAR BRAND", b1: "CONTACT NOW",
+                t2: "KEY DUPLICATION", d2: "Millimetric precision in every cut and coding. We use the latest laser technology.",
+                t3: "LOCK REPAIR", d3: "Maximum security and functionality. We repair door locks and window mechanisms.",
+                t4: "DIAGNOSTICS", d4: "We find and solve every electronic error. Full scanning of your car modules."
             }
         };
 
         function changeL(l) {
-            document.getElementById('h1').innerText = texts[l].h1;
-            document.getElementById('p1').innerText = texts[l].p1;
-            document.getElementById('b1').innerText = texts[l].b1;
-            document.getElementById('h2').innerText = texts[l].h2;
-            document.getElementById('p2').innerText = texts[l].p2;
-            document.getElementById('h3').innerText = texts[l].h3;
-            document.getElementById('p3').innerText = texts[l].p3;
-            document.getElementById('h4').innerText = texts[l].h4;
-            document.getElementById('p4').innerText = texts[l].p4;
-            document.getElementById('f1').innerText = texts[l].f1;
-            document.getElementById('f2').innerText = texts[l].f2;
+            document.getElementById('h1').innerText = data[l].h1;
+            document.getElementById('p1').innerText = data[l].p1;
+            document.getElementById('b1').innerText = data[l].b1;
+            document.getElementById('t2').innerText = data[l].t2;
+            document.getElementById('d2').innerText = data[l].d2;
+            document.getElementById('t3').innerText = data[l].t3;
+            document.getElementById('d3').innerText = data[l].d3;
+            document.getElementById('t4').innerText = data[l].t4;
+            document.getElementById('d4').innerText = data[l].d4;
         }
     </script>
 </body>
