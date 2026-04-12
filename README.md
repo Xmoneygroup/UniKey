@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Domain | Minimalist VIP</title>
+    <title>Premium Domain Offering</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@200;400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Montserrat:wght@100;300&display=swap');
 
         body, html {
             margin: 0;
@@ -13,148 +13,171 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: #000;
+            background: radial-gradient(circle at center, #0a1118 0%, #000000 100%);
+            font-family: 'Montserrat', sans-serif;
         }
 
-        /* SFONDI AURORA ME GRADIENTË DINAMIKË */
-        .aurora-container {
-            position: fixed;
+        /* SFONDI ME GRIMCA PLUHURI DRITE */
+        #star-canvas {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 1;
-            filter: blur(100px); /* Krijon shkrirjen e dritave */
-            opacity: 0.6;
         }
 
-        .aurora-blob {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            animation: move 20s infinite alternate;
-        }
-
-        .blob-1 {
-            background: rgba(0, 150, 255, 0.4);
-            top: -10%;
-            left: -10%;
-        }
-
-        .blob-2 {
-            background: rgba(0, 255, 200, 0.3);
-            bottom: -10%;
-            right: -10%;
-            animation-duration: 25s;
-        }
-
-        .blob-3 {
-            background: rgba(0, 50, 200, 0.5);
-            top: 40%;
-            left: 30%;
-            animation-duration: 30s;
-        }
-
-        @keyframes move {
-            from { transform: translate(0, 0) scale(1); }
-            to { transform: translate(200px, 100px) scale(1.5); }
-        }
-
-        /* KONTENTI */
-        .content {
+        .container {
             position: relative;
             z-index: 10;
             height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
+        }
+
+        /* PLLAKATA "OBSIDIAN GLASS" */
+        .glass-panel {
+            position: relative;
+            padding: 80px 100px;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            border-radius: 0px; /* Stil arkitektural, pa kthesa */
+            backdrop-filter: blur(25px);
             text-align: center;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
         }
 
-        .main-title {
-            font-family: 'Cinzel', serif;
-            font-size: 5rem;
+        /* EFEKTI I DRITËS QË KALON MBI XHAM */
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.05), transparent);
+            transform: rotate(45deg);
+            animation: lightSweep 6s infinite;
+        }
+
+        .title {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
             color: #fff;
-            letter-spacing: 25px;
             margin: 0;
+            letter-spacing: 20px;
             text-transform: uppercase;
-            /* Shkëlqim i pastër i bardhë VIP */
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(0, 200, 255, 0.3);
-            animation: fadeIn 3s ease-out;
-        }
-
-        .info-box {
-            margin-top: 40px;
-            border-left: 1px solid rgba(0, 255, 255, 0.3);
-            border-right: 1px solid rgba(0, 255, 255, 0.3);
-            padding: 10px 40px;
-            animation: lineExpand 2s ease-out forwards 1s;
-            opacity: 0;
+            background: linear-gradient(to right, #fff 20%, #00d2ff 50%, #fff 80%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shineText 5s linear infinite;
         }
 
         .subtitle {
-            font-family: 'Montserrat', sans-serif;
-            color: #fff;
-            font-size: 1.2rem;
-            letter-spacing: 12px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #00d2ff;
+            letter-spacing: 15px;
             text-transform: uppercase;
-            font-weight: 200;
+            font-weight: 300;
+            opacity: 0.8;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; filter: blur(20px); transform: scale(1.1); }
-            to { opacity: 1; filter: blur(0); transform: scale(1); }
+        /* ANIMACIONET */
+        @keyframes lightSweep {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
         }
 
-        @keyframes lineExpand {
-            from { opacity: 0; width: 0; }
-            to { opacity: 1; width: auto; }
+        @keyframes shineText {
+            to { background-position: 200% center; }
         }
 
-        /* REAGIMI I MAUSIT (Kursor VIP) */
-        .cursor-glow {
-            position: fixed;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 5;
-            transform: translate(-50%, -50%);
+        /* LINJAT DEKORATIVE VIP */
+        .corner-line {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #00d2ff;
         }
+        .tl { top: 0; left: 0; border-right: none; border-bottom: none; }
+        .br { bottom: 0; right: 0; border-left: none; border-top: none; }
 
         @media (max-width: 768px) {
-            .main-title { font-size: 2.5rem; letter-spacing: 10px; }
-            .subtitle { font-size: 0.8rem; letter-spacing: 6px; }
+            .title { font-size: 1.5rem; letter-spacing: 10px; }
+            .glass-panel { padding: 40px 20px; width: 85%; }
+            .subtitle { font-size: 0.7rem; letter-spacing: 5px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="aurora-container">
-        <div class="aurora-blob blob-1"></div>
-        <div class="aurora-blob blob-2"></div>
-        <div class="aurora-blob blob-3"></div>
-    </div>
+    <canvas id="star-canvas"></canvas>
 
-    <div class="cursor-glow" id="cursor"></div>
-
-    <div class="content">
-        <h1 class="main-title">Domain Sale</h1>
-        <div class="info-box">
+    <div class="container">
+        <div class="glass-panel">
+            <div class="corner-line tl"></div>
+            <div class="corner-line br"></div>
+            
+            <h1 class="title">DOMAIN SALE</h1>
             <p class="subtitle">This Domain is for Sale</p>
         </div>
     </div>
 
     <script>
-        const cursor = document.getElementById('cursor');
-        window.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
+        const canvas = document.getElementById('star-canvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Star {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5;
+                this.speed = Math.random() * 0.2;
+                this.opacity = Math.random();
+            }
+            draw() {
+                ctx.fillStyle = `rgba(0, 210, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            update() {
+                this.y -= this.speed;
+                if (this.y < 0) this.y = canvas.height;
+                this.draw();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < 150; i++) {
+                stars.push(new Star());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => star.update());
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            stars = [];
+            init();
         });
     </script>
-
 </body>
 </html>
