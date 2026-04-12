@@ -27,7 +27,7 @@
             z-index: 1;
         }
 
-        /* POZICIONIMI I RREGULLUAR (MË LART DHE NË QENDËR) */
+        /* POZICIONIMI FINAL - EDHE MË LART */
         .main-wrapper {
             position: relative;
             z-index: 10;
@@ -39,7 +39,7 @@
             align-items: center;     
             gap: 60px;               
             padding: 20px;
-            padding-bottom: 100px; /* E shtyjmë përmbajtjen pak më lart */
+            padding-bottom: 180px; /* Ngritur edhe më lart për balancë perfekte */
             box-sizing: border-box;
             pointer-events: none;
         }
