@@ -42,42 +42,42 @@
             pointer-events: none;
         }
 
-        /* PLLAKATA APPLE GLASS STYLE */
+        /* PLLAKATA APPLE GLASS - E ZGJERUAR DHE MË E HAPUR */
         .glass-card {
-            background: rgba(255, 255, 255, 0.1); /* Tejdukshmëri e lehtë gri */
-            backdrop-filter: blur(25px); /* Efekti i mjegullës Apple */
-            -webkit-backdrop-filter: blur(25px);
-            width: 380px; /* Pak më e vogël dhe elegante */
-            padding: 40px;
-            border-radius: 35px; /* Kthesa më të buta Apple */
+            background: rgba(255, 255, 255, 0.2); /* Më e hapur dhe më e dukshme */
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            width: 480px; /* E zgjeruar anash sipas kërkesës */
+            padding: 50px;
+            border-radius: 35px;
             text-align: left;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
             pointer-events: auto;
-            border: 1px solid rgba(255, 255, 255, 0.15); /* Kufiri i hollë i xhamit */
+            border: 1px solid rgba(255, 255, 255, 0.25);
         }
 
         .glass-card h2 {
             color: #fff;
-            font-size: 1.5rem; /* Zvogëlimi i shkronjave */
+            font-size: 1.5rem;
             margin: 0 0 10px 0;
             font-weight: 600;
             letter-spacing: -0.5px;
         }
 
         .glass-card .domain-line {
-            display: block; /* Ndryshuar për t'i mbajtur brenda më pastër */
+            display: block;
             margin-bottom: 25px;
         }
 
         .glass-card .domain-name {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.85); /* Teksti pak më i qartë */
             font-weight: 300;
-            font-size: 0.9rem; /* Zvogëlimi i shkronjave */
+            font-size: 0.95rem;
             margin: 0 0 5px 0;
         }
 
         .glass-card .price {
-            font-size: 1.3rem; /* Zvogëlimi i numrave */
+            font-size: 1.4rem;
             font-weight: 700;
             color: #fff;
             margin: 0;
@@ -87,7 +87,7 @@
         .next-btn {
             display: block;
             width: 100%;
-            padding: 16px;
+            padding: 18px;
             background: #fff;
             color: #000;
             text-decoration: none;
@@ -98,6 +98,7 @@
             cursor: pointer;
             text-align: center;
             font-size: 1rem;
+            margin-top: 10px;
         }
 
         .next-btn:hover {
@@ -106,9 +107,9 @@
         }
 
         .contact-info {
-            color: rgba(255,255,255,0.5);
-            font-size: 0.8rem;
-            margin-top: 30px;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.85rem;
+            margin-top: 35px;
             text-align: center;
         }
 
@@ -121,7 +122,7 @@
             margin-top: 5px;
         }
 
-        /* INFO PANEL - JAPUR I PAPREKUR */
+        /* INFO PANEL - I PAPREKUR */
         .info-panel {
             text-align: left;
             color: #fff;
@@ -171,7 +172,7 @@
             .main-wrapper { flex-direction: column; gap: 40px; padding-bottom: 40px; }
             .info-panel { text-align: center; }
             .trust-list { align-items: center; }
-            .glass-card { width: 90%; max-width: 380px; }
+            .glass-card { width: 90%; max-width: 480px; }
             .info-domain { font-size: 2.5rem; }
         }
     </style>
@@ -218,7 +219,6 @@
     </div>
 
     <script>
-        // Kodi i raketave (I PAPREKUR)
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
