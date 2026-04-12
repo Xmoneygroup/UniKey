@@ -1,137 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XStore 3D</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Premium Galaxy</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
-body{background:#050505;color:#fff;overflow:hidden;}
+    body {
+      overflow: hidden;
+      background: black;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
 
-header{
-  position:absolute;
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  padding:20px 50px;
-  z-index:10;
-}
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
 
-.logo span{color:#ff3c00;text-shadow:0 0 15px #ff3c00;}
-nav a{margin:0 15px;color:#aaa;text-decoration:none;}
-nav a:hover{color:#fff;text-shadow:0 0 10px #ff3c00;}
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
 
-.btn{border:1px solid #ff3c00;padding:8px 15px;border-radius:8px;color:#fff;text-decoration:none;}
-.btn:hover{background:#ff3c00;box-shadow:0 0 10px #ff3c00;}
+    h1 {
+      font-size: 4rem;
+      letter-spacing: 2px;
+      background: linear-gradient(90deg, #fff, #888, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 3s infinite alternate;
+    }
 
-#canvas{
-  width:100vw;
-  height:100vh;
-  display:block;
-}
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #fff;
+      }
+      to {
+        text-shadow: 0 0 30px #00ccff, 0 0 60px #6600ff;
+      }
+    }
 
-.overlayUI{
-  position:absolute;
-  bottom:50px;
-  left:50%;
-  transform:translateX(-50%);
-  text-align:center;
-}
-
-.overlayUI h1 span{
-  color:#ff3c00;
-  text-shadow:0 0 20px #ff3c00;
-}
-
-.cta{
-  margin-top:20px;
-  padding:12px 30px;
-  border:2px solid #ff3c00;
-  background:transparent;
-  color:#fff;
-  border-radius:25px;
-  cursor:pointer;
-}
-
-.cta:hover{
-  background:#ff3c00;
-  box-shadow:0 0 20px #ff3c00;
-}
-</style>
+    p {
+      margin-top: 20px;
+      opacity: 0.7;
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-  <div class="logo"><span>X</span>STORE</div>
-  <nav>
-    <a href="#">Car Parts</a>
-    <a href="#">Accessories</a>
-    <a href="#">Performance</a>
-    <a href="#">Services</a>
-  </nav>
-  <a href="#" class="btn">Login</a>
-</header>
+<canvas id="galaxy"></canvas>
 
-<canvas id="canvas"></canvas>
-
-<div class="overlayUI">
-  <h1><span>X</span>STORE 3D</h1>
-  <button class="cta">ENTER STORE</button>
+<div class="content">
+  <h1>PREMIUM DOMAIN</h1>
+  <p>Future digital asset</p>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
 <script>
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({canvas:document.getElementById('canvas'), antialias:true});
-renderer.setSize(window.innerWidth, window.innerHeight);
+  const canvas = document.getElementById("galaxy");
+  const ctx = canvas.getContext("2d");
 
-// Lighting
-const light = new THREE.PointLight(0xff3c00, 2, 100);
-light.position.set(5,5,5);
-scene.add(light);
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
-const ambient = new THREE.AmbientLight(0xffffff, 0.3);
-scene.add(ambient);
+  let stars = [];
 
-// Car placeholder (box as demo)
-const geometry = new THREE.BoxGeometry(3,1,6);
-const material = new THREE.MeshStandardMaterial({
-  color:0x111111,
-  emissive:0xff3c00,
-  emissiveIntensity:0.2,
-  metalness:1,
-  roughness:0.2
-});
+  class Star {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.radius = Math.random() * 1.5;
+      this.speed = Math.random() * 0.5;
+    }
 
-const car = new THREE.Mesh(geometry, material);
-scene.add(car);
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = "white";
+      ctx.fill();
+    }
 
-camera.position.z = 10;
+    update() {
+      this.y += this.speed;
+      if (this.y > canvas.height) {
+        this.y = 0;
+        this.x = Math.random() * canvas.width;
+      }
+      this.draw();
+    }
+  }
 
-// Mouse interaction
-let mouseX = 0;
-document.addEventListener('mousemove', (e)=>{
-  mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-});
+  function init() {
+    for (let i = 0; i < 300; i++) {
+      stars.push(new Star());
+    }
+  }
 
-function animate(){
-  requestAnimationFrame(animate);
-  car.rotation.y += 0.01;
-  car.rotation.x = mouseX * 0.3;
-  renderer.render(scene, camera);
-}
+  function animate() {
+    ctx.fillStyle = "rgba(0, 0, 20, 0.3)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-animate();
+    stars.forEach(star => star.update());
 
-window.addEventListener('resize', ()=>{
-  camera.aspect = window.innerWidth/window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-});
+    requestAnimationFrame(animate);
+  }
+
+  init();
+  animate();
+
+  window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
 </script>
 
 </body>
