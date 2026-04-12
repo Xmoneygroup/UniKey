@@ -5,7 +5,6 @@
     <title>Elite Domain Sales | dubrent.com</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        /* Importimi i fonteve: Space Grotesk per stil modern/neon, Syncopate per titullin ekzistues */
         @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Space+Grotesk:wght@300;400;600;700&display=swap');
 
         body, html {
@@ -15,7 +14,6 @@
             height: 100%;
             overflow: hidden;
             background-color: #000;
-            /* Fonti i ri i aplikuar ne te gjithe faqen */
             font-family: 'Space Grotesk', sans-serif;
         }
 
@@ -44,98 +42,86 @@
             pointer-events: none;
         }
 
-        /* PLLAKATA ME NEON GLOW */
+        /* PLLAKATA APPLE GLASS STYLE */
         .glass-card {
-            background: #ffffff;
-            width: 440px;
-            padding: 45px;
-            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.1); /* Tejdukshmëri e lehtë gri */
+            backdrop-filter: blur(25px); /* Efekti i mjegullës Apple */
+            -webkit-backdrop-filter: blur(25px);
+            width: 380px; /* Pak më e vogël dhe elegante */
+            padding: 40px;
+            border-radius: 35px; /* Kthesa më të buta Apple */
             text-align: left;
-            /* Hija ekzistuese plus shtohet shkelqimi neon cyan */
-            box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 20px rgba(0, 242, 255, 0.5);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
             pointer-events: auto;
-            border: 1px solid rgba(0, 242, 255, 0.2); /* Kufiri me ngjyre te lehte neon */
+            border: 1px solid rgba(255, 255, 255, 0.15); /* Kufiri i hollë i xhamit */
         }
 
         .glass-card h2 {
-            color: #000;
-            font-size: 2rem;
-            margin: 0 0 15px 0;
-            font-weight: 700;
-            letter-spacing: -1px;
+            color: #fff;
+            font-size: 1.5rem; /* Zvogëlimi i shkronjave */
+            margin: 0 0 10px 0;
+            font-weight: 600;
+            letter-spacing: -0.5px;
         }
 
         .glass-card .domain-line {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            gap: 10px;
+            display: block; /* Ndryshuar për t'i mbajtur brenda më pastër */
+            margin-bottom: 25px;
         }
 
         .glass-card .domain-name {
-            color: #333;
-            font-weight: 400;
-            font-size: 1.1rem;
-            margin: 0;
-            white-space: nowrap;
+            color: rgba(255,255,255,0.7);
+            font-weight: 300;
+            font-size: 0.9rem; /* Zvogëlimi i shkronjave */
+            margin: 0 0 5px 0;
         }
 
-        /* NUMRAT ME NGJYRE NEON */
         .glass-card .price {
-            font-size: 1.6rem;
+            font-size: 1.3rem; /* Zvogëlimi i numrave */
             font-weight: 700;
-            color: #00c3ff; /* Ngjyra neon per cmimin */
+            color: #fff;
             margin: 0;
-            white-space: nowrap;
-            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5); /* Shkelqim i lehte ne numra */
+            letter-spacing: 0.5px;
         }
 
-        /* BUTONI ME STIL NEON */
         .next-btn {
             display: block;
             width: 100%;
-            padding: 20px;
-            background: linear-gradient(45deg, #111, #333);
-            color: #fff;
+            padding: 16px;
+            background: #fff;
+            color: #000;
             text-decoration: none;
             font-weight: 600;
-            border-radius: 12px;
+            border-radius: 18px;
             transition: all 0.3s ease;
-            border: 1px solid rgba(0, 242, 255, 0.3);
+            border: none;
             cursor: pointer;
             text-align: center;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            font-size: 1rem;
         }
 
         .next-btn:hover {
-            background: linear-gradient(45deg, #00c3ff, #00f2ff);
-            color: #000;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 242, 255, 0.4);
+            background: rgba(255,255,255,0.9);
+            transform: scale(0.98);
         }
 
         .contact-info {
-            color: #555;
-            font-size: 0.95rem;
-            margin-top: 35px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.8rem;
+            margin-top: 30px;
             text-align: center;
-            font-weight: 300;
         }
 
         .phone-link {
-            color: #00c3ff; /* Linku i telefonit me ngjyre neon */
+            color: #fff;
             text-decoration: none;
-            font-size: 1.6rem;
-            font-weight: 700;
+            font-size: 1.2rem;
+            font-weight: 600;
             display: block;
-            margin-top: 8px;
-            letter-spacing: 1px;
+            margin-top: 5px;
         }
 
-        /* PJESA JASHTE PLLAKATES MERTET SIÇ ISHTE */
+        /* INFO PANEL - JAPUR I PAPREKUR */
         .info-panel {
             text-align: left;
             color: #fff;
@@ -178,14 +164,14 @@
 
         .trust-item span {
             font-size: 1.4rem;
-            color: #00f2ff; /* Iconat me ngjyre neon cyan */
+            color: #00f2ff;
         }
 
         @media (max-width: 1000px) {
             .main-wrapper { flex-direction: column; gap: 40px; padding-bottom: 40px; }
             .info-panel { text-align: center; }
             .trust-list { align-items: center; }
-            .glass-card { width: 95%; max-width: 440px; padding: 30px; }
+            .glass-card { width: 90%; max-width: 380px; }
             .info-domain { font-size: 2.5rem; }
         }
     </style>
@@ -232,6 +218,7 @@
     </div>
 
     <script>
+        // Kodi i raketave (I PAPREKUR)
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
