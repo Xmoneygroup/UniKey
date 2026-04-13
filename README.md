@@ -226,7 +226,7 @@
 
             <h2>Buy Now</h2>
             <div class="domain-line">
-                <p class="domain-name">dubrent.com is for sale now</p>
+                <p class="domain-name">dubinv.com is for sale now</p>
                 <p class="price">20,000 USD</p>
             </div>
             
