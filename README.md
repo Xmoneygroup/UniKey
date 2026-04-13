@@ -42,13 +42,12 @@
             pointer-events: none;
         }
 
-        /* PLLAKATA 50% MË E MADHE DHE ME BLUR TË LEHTË */
         .glass-card {
-            background: rgba(255, 255, 255, 0.05); /* Shumë transparente që të duken raketat */
-            backdrop-filter: blur(8px); /* Blur i lehtë, jo i dendur */
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(8px); 
             -webkit-backdrop-filter: blur(8px);
-            width: 570px; /* Zmadhuar 50% nga origjinali */
-            padding: 60px; /* Hapësirë e brendshme më e madhe */
+            width: 570px; 
+            padding: 60px; 
             border-radius: 40px;
             text-align: left;
             box-shadow: 0 30px 60px rgba(0,0,0,0.3);
@@ -56,9 +55,44 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        /* STILIMI PËR VERIFIED DHE PREMIUM */
+        .badge-container {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .verified-badge {
+            background: rgba(0, 242, 255, 0.15);
+            color: #00f2ff;
+            border: 1px solid rgba(0, 242, 255, 0.3);
+        }
+
+        .premium-badge {
+            background: rgba(255, 215, 0, 0.15);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .badge span {
+            font-size: 14px;
+        }
+
         .glass-card h2 {
             color: #fff;
-            font-size: 2rem; /* Pak më i madh për t'u përshtatur me pllakatën */
+            font-size: 2rem; 
             margin: 0 0 15px 0;
             font-weight: 600;
             letter-spacing: -0.5px;
@@ -121,7 +155,6 @@
             margin-top: 10px;
         }
 
-        /* INFO PANEL - I PAPREKUR */
         .info-panel {
             text-align: left;
             color: #fff;
@@ -182,6 +215,15 @@
 
     <div class="main-wrapper">
         <div class="glass-card">
+            <div class="badge-container">
+                <div class="badge verified-badge">
+                    <span class="material-icons">verified</span> verified
+                </div>
+                <div class="badge premium-badge">
+                    <span class="material-icons">stars</span> premium domain
+                </div>
+            </div>
+
             <h2>Buy Now</h2>
             <div class="domain-line">
                 <p class="domain-name">dubrent.com is for sale now</p>
