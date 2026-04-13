@@ -55,6 +55,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        /* STILIMI PËR VERIFIED DHE PREMIUM */
         .badge-container {
             display: flex;
             gap: 12px;
@@ -238,7 +239,7 @@
         </div>
 
         <div class="info-panel">
-            <div class="info-domain" id="domain-target">dubinv.com</div>
+            <div class="info-domain">dubinv.com</div>
             <div class="info-status">is for sale!</div>
             
             <div class="trust-list">
@@ -263,87 +264,11 @@
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
 
-        // --- KLASA E PERSONIT (STICKMAN) ---
-        class Person {
-            constructor() {
-                this.reset();
-            }
-            reset() {
-                this.x = -50;
-                this.y = canvas.height * 0.7;
-                this.state = 'walking'; // walking, sitting, falling
-                this.waitTimer = 0;
-                this.angle = 0;
-                this.fallY = 0;
-            }
-            update() {
-                const target = document.getElementById('domain-target').getBoundingClientRect();
-                const tx = target.left + target.width / 2;
-                const ty = target.top;
-
-                if (this.state === 'walking') {
-                    this.angle += 0.15;
-                    this.x += (tx - this.x) * 0.02;
-                    this.y += (ty - this.y) * 0.02;
-                    if (Math.abs(this.x - tx) < 5) this.state = 'sitting';
-                } else if (this.state === 'sitting') {
-                    this.waitTimer++;
-                    if (this.waitTimer > 200) this.state = 'falling';
-                } else if (this.state === 'falling') {
-                    this.fallY += 0.5;
-                    this.y += this.fallY;
-                    if (this.y > canvas.height + 100) this.reset();
-                }
-            }
-            draw() {
-                ctx.save();
-                ctx.strokeStyle = '#00f2ff';
-                ctx.lineWidth = 3;
-                ctx.lineCap = 'round';
-
-                // Koka
-                ctx.beginPath();
-                ctx.arc(this.x, this.y - 30, 7, 0, Math.PI * 2);
-                ctx.stroke();
-
-                // Trupi
-                ctx.beginPath();
-                ctx.moveTo(this.x, this.y - 23);
-                ctx.lineTo(this.x, this.y - 5);
-                ctx.stroke();
-
-                // Duart dhe Këmbët (Animacion)
-                let m = Math.sin(this.angle) * 10;
-                if (this.state === 'sitting') {
-                    // Pozicioni ulur
-                    ctx.beginPath();
-                    ctx.moveTo(this.x, this.y-15); ctx.lineTo(this.x-15, this.y-5); // Dora 1
-                    ctx.moveTo(this.x, this.y-15); ctx.lineTo(this.x+15, this.y-5); // Dora 2
-                    ctx.moveTo(this.x, this.y-5); ctx.lineTo(this.x-10, this.y+5); // Këmba 1
-                    ctx.moveTo(this.x, this.y-5); ctx.lineTo(this.x+10, this.y+5); // Këmba 2
-                    ctx.stroke();
-                } else {
-                    // Pozicioni duke ecur/rënë
-                    ctx.beginPath();
-                    ctx.moveTo(this.x, this.y-18); ctx.lineTo(this.x-12, this.y-10+m); 
-                    ctx.moveTo(this.x, this.y-18); ctx.lineTo(this.x+12, this.y-10-m);
-                    ctx.moveTo(this.x, this.y-5); ctx.lineTo(this.x-8+m, this.y+10);
-                    ctx.moveTo(this.x, this.y-5); ctx.lineTo(this.x+8-m, this.y+10);
-                    ctx.stroke();
-                }
-                ctx.restore();
-            }
-        }
-
-        const lonePerson = new Person();
-
-        // --- RAKETAT (PA NDRYSHUAR) ---
         class Firework {
             constructor() {
                 this.x = Math.random() * canvas.width;
@@ -398,20 +323,11 @@
         }
 
         let fireworks = []; let particles = [];
-
         function animate() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.18)'; 
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Raketat
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.18)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
             if (Math.random() < 0.07) { fireworks.push(new Firework()); }
             fireworks.forEach((fw, index) => { fw.update(); fw.draw(); if (fw.dead) fireworks.splice(index, 1); });
             particles.forEach((p, index) => { p.update(); p.draw(); if (p.alpha <= 0) particles.splice(index, 1); });
-            
-            // Personi (Gjithmonë sipër raketave)
-            lonePerson.update();
-            lonePerson.draw();
-
             requestAnimationFrame(animate);
         }
         animate();
