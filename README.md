@@ -159,7 +159,7 @@
                 <div class="badge verified-badge"><span class="material-icons">verified</span> verified</div>
                 <div class="badge premium-badge"><span class="material-icons">stars</span> premium domain</div>
             </div>
-            <h2>Buy Now</h2>
+            <h2>dubrent.com</h2>
             <div class="domain-line">
                 <p class="domain-name">dubrent.com is for sale now</p>
                 <p class="price">9,000 USD</p>
@@ -176,7 +176,7 @@
                 <div class="badge verified-badge"><span class="material-icons">verified</span> verified</div>
                 <div class="badge premium-badge"><span class="material-icons">stars</span> premium domain</div>
             </div>
-            <h2>Buy Now</h2>
+            <h2>dubmall.com</h2>
             <div class="domain-line">
                 <p class="domain-name">dubmall.com is for sale now</p>
                 <p class="price">25,000 USD</p>
