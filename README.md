@@ -230,7 +230,7 @@
                 <p class="price">9,000 USD</p>
             </div>
             
-            <a href="VENDO_LINKUN_TËND" class="next-btn">Next</a>
+            <a href="https://www.namecheap.com/domains/registration/results/?domain=dubrent.com" class="next-btn">Buy Domain</a>
             
             <div class="contact-info">
                 Need help? Give us a call<br>
