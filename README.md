@@ -179,7 +179,7 @@
             <h2>dubmall.com</h2>
             <div class="domain-line">
                 <p class="domain-name">dubmall.com is for sale now</p>
-                <p class="price">25,000 USD</p>
+                <p class="price">19,000 USD</p>
             </div>
             <a href="https://www.namecheap.com/domains/registration/results/?domain=dubmall.com" class="next-btn">Buy Domain</a>
             <div class="contact-info">
